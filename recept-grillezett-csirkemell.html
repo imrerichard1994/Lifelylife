@@ -19,7 +19,7 @@
 </head>
 <body>
   <div class="wrap">
-    <a class="back" href="#" onclick="history.back(); return false;">← Vissza</a>
+    <a class="back" href="#" onclick="if(document.referrer && document.referrer.indexOf('index.html')!==-1){ history.back(); } else { window.location.href='index.html#view-receptek'; } return false;">← Vissza</a>
     <article class="card">
       <h1 class="title">Grillezett csirkemell, barna rizs, olívaolajos saláta</h1>
       <img class="img" src="images/grillezett_csirkemell_salata.png" alt="Grillezett csirkemell rizzsel és salátával">
