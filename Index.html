@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="hu">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bevásárlólista + Heti étrend + Receptek</title>
+  <meta name="description" content="Egyszerű bevásárlólista, heti étrend és receptek. A pipák helyi tárolóban mentődnek." />
+  <style>
+    :root { --gap: 12px; --pad: 12px; --radius: 12px; --brand:#2a775a; }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body { margin:0; background:#f6f7f9; color:#111; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; }
+    header { position:sticky; top:0; z-index:10; background:var(--brand); color:#fff; padding:10px 14px; display:flex; align-items:center; gap:10px; }
+    header h1 { font-size:1.15rem; margin:0; flex:1; }
+    nav { display:flex; gap:8px; padding:10px; background:#f6f7f9; position:sticky; top:48px; z-index:9; }
+    nav button { flex:1; padding:10px; border-radius:10px; border:1px solid #ddd; background:#fff; cursor:pointer; }
+    nav button.active { background:#e8f5ee; border-color:var(--brand); color:var(--brand); }
+    main { padding:8px 12px 60px; }
+    .card { background:#fff; border-radius:var(--radius); padding:var(--pad); box-shadow:0 1px 6px rgba(0,0,0,.06); margin-bottom:var(--gap); }
+    .item { display:flex; align-items:center; gap:10px; padding:10px 8px; border-bottom:1px solid #eee; }
+    .item:last-child { border-bottom:none; }
+    input[type="checkbox"] { width:22px; height:22px; accent-color:var(--brand); }
+    label { font-size:1.05rem; line-height:1.35; flex:1; }
+    .controls { display:flex; gap:8px; margin:8px 0 12px; }
+    button { font-size:.95rem; padding:10px 12px; border-radius:10px; border:1px solid #ccc; background:#fff; cursor:pointer; }
+    button.primary { background:var(--brand); color:#fff; border-color:var(--brand); }
+    table { width:100%; border-collapse:collapse; min-width:640px; }
+    th, td { text-align:left; padding:8px; border-bottom:1px solid #eee; vertical-align:top; }
+    thead th { position:sticky; top:0; background:#f1f1f1; z-index:1; }
+    .hidden { display:none; }
+    footer { position:sticky; bottom:0; padding:8px; background:#f6f7f9; font-size:.9rem; color:#444; }
+    .small { color:#444; font-size:.92rem; }
+    .notice { padding:.6rem .8rem; border:1px dashed #ccc; border-radius:8px; background:#fafafa; margin-bottom:.5rem; }
+    .recipe-meta { display:flex; gap:16px; flex-wrap:wrap; margin:8px 0 12px; color:#333; }
+    .recipe-meta span { background:#f6f7f9; border:1px solid #e5e5e5; border-radius:999px; padding:.3rem .6rem; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Bevásárlólista + Heti étrend + Receptek</h1>
+  </header>
+
+  <nav>
+    <button class="active" id="tab-lista" type="button" aria-controls="view-lista" aria-selected="true">Bevásárlólista</button>
+    <button id="tab-etrend" type="button" aria-controls="view-etrend" aria-selected="false">Heti étrend</button>
+    <button id="tab-receptek" type="button" aria-controls="view-receptek" aria-selected="false">Receptek</button>
+  </nav>
+
+  <main>
+    <!-- LISTA -->
+    <section id="view-lista" role="region" aria-labelledby="tab-lista">
+      <div class="notice small">A pipák automatikusan <b>elmentődnek</b> ezen az eszközön (helyi tároló).</div>
+      <div class="controls">
+        <button class="primary" id="checkAll" type="button">Összes kipipálása</button>
+        <button id="uncheckAll" type="button">Összes ürítése</button>
+      </div>
+
+      <section class="card"><h2>Fehérjeforrások</h2>
+        <div class="item"><input type="checkbox" id="item_1"><label for="item_1">Csirkemellfilé – 800–1000 g</label></div>
+        <div class="item"><input type="checkbox" id="item_2"><label for="item_2">Pulykamell / csirkecomb – 500 g</label></div>
+        <div class="item"><input type="checkbox" id="item_3"><label for="item_3">Tonhal konzerv (vízben) – 3 db</label></div>
+        <div class="item"><input type="checkbox" id="item_4"><label for="item_4">Lazac – 2 szelet (kb. 300 g)</label></div>
+        <div class="item"><input type="checkbox" id="item_5"><label for="item_5">Tojás – 10 db</label></div>
+        <div class="item"><input type="checkbox" id="item_6"><label for="item_6">Kefir / natúr joghurt – 2 db (500 ml-es)</label></div>
+        <div class="item"><input type="checkbox" id="item_7"><label for="item_7">Növényi tej (mandula / zab) – 1 l</label></div>
+      </section>
+
+      <section class="card"><h2>Zöldségek és saláták</h2>
+        <div class="item"><input type="checkbox" id="item_8"><label for="item_8">Brokkoli – 500 g</label></div>
+        <div class="item"><input type="checkbox" id="item_9"><label for="item_9">Cukkini – 2 db</label></div>
+        <div class="item"><input type="checkbox" id="item_10"><label for="item_10">Répa – 500 g</label></div>
+        <div class="item"><input type="checkbox" id="item_11"><label for="item_11">Paradicsom – 4–5 db</label></div>
+        <div class="item"><input type="checkbox" id="item_12"><label for="item_12">Uborka – 2 db</label></div>
+        <div class="item"><input type="checkbox" id="item_13"><label for="item_13">Zöldbab – 400 g</label></div>
+        <div class="item"><input type="checkbox" id="item_14"><label for="item_14">Spenót / salátakeverék – 1–2 csomag</label></div>
+        <div class="item"><input type="checkbox" id="item_15"><label for="item_15">Édesburgonya – 2 db</label></div>
+        <div class="item"><input type="checkbox" id="item_16"><label for="item_16">Citrom – 2 db</label></div>
+      </section>
+
+      <section class="card"><h2>Gyümölcsök</h2>
+        <div class="item"><input type="checkbox" id="item_17"><label for="item_17">Banán – 4–5 db</label></div>
+        <div class="item"><input type="checkbox" id="item_18"><label for="item_18">Alma – 4 db</label></div>
+        <div class="item"><input type="checkbox" id="item_19"><label for="item_19">Narancs – 2 db</label></div>
+        <div class="item"><input type="checkbox" id="item_20"><label for="item_20">Fagyasztott bogyós gyümölcs – 1 csomag (250 g)</label></div>
+      </section>
+
+      <section class="card"><h2>Gabona / köret</h2>
+        <div class="item"><input type="checkbox" id="item_21"><label for="item_21">Zabpehely – 500 g</label></div>
+        <div class="item"><input type="checkbox" id="item_22"><label for="item_22">Barna rizs – 500 g</label></div>
+        <div class="item"><input type="checkbox" id="item_23"><label for="item_23">Bulgur / quinoa – 250 g</label></div>
+        <div class="item"><input type="checkbox" id="item_24"><label for="item_24">Teljes kiőrlésű kenyér – 1 csomag</label></div>
+        <div class="item"><input type="checkbox" id="item_25"><label for="item_25">Teljes kiőrlésű tészta – 250 g</label></div>
+        <div class="item"><input type="checkbox" id="item_26"><label for="item_26">Kuszkusz – 250 g</label></div>
+      </section>
+
+      <section class="card"><h2>Magvak és olajok</h2>
+        <div class="item"><input type="checkbox" id="item_27"><label for="item_27">Dió – 150 g</label></div>
+        <div class="item"><input type="checkbox" id="item_28"><label for="item_28">Mandula – 100 g</label></div>
+        <div class="item"><input type="checkbox" id="item_29"><label for="item_29">Tökmag – 100 g</label></div>
+        <div class="item"><input type="checkbox" id="item_30"><label for="item_30">Chia mag – 100 g</label></div>
+        <div class="item"><input type="checkbox" id="item_31"><label for="item_31">Lenmag – 100 g</label></div>
+        <div class="item"><input type="checkbox" id="item_32"><label for="item_32">Extra szűz olívaolaj – 250 ml</label></div>
+        <div class="item"><input type="checkbox" id="item_33"><label for="item_33">Natúr mogyoróvaj – 200–250 g</label></div>
+      </section>
+
+      <section class="card"><h2>Egyéb</h2>
+        <div class="item"><input type="checkbox" id="item_34"><label for="item_34">Lencse – 1 db konzerv / 250 g száraz</label></div>
+        <div class="item"><input type="checkbox" id="item_35"><label for="item_35">Kukorica konzerv – 1–2 db</label></div>
+        <div class="item"><input type="checkbox" id="item_36"><label for="item_36">Humusz – 1 doboz</label></div>
+        <div class="item"><input type="checkbox" id="item_37"><label for="item_37">Kamillatea – 1 doboz</label></div>
+        <div class="item"><input type="checkbox" id="item_38"><label for="item_38">Alap fűszerek: só, bors, oregánó, fokhagyma, paprika</label></div>
+      </section>
+    </section>
+
+    <!-- ÉTREND -->
+    <section id="view-etrend" class="hidden" role="region" aria-labelledby="tab-etrend">
+      <div class="card">
+        <h2>Heti étrend – áttekintő</h2>
+        <div class="small" style="margin-bottom:8px;">Görgethető táblázat (vízszintesen is), mobilra optimalizálva.</div>
+        <div style="overflow-x:auto;">
+          <table>
+            <thead>
+              <tr><th>Nap</th><th>Reggeli</th><th>Ebéd</th><th>Uzsonna</th><th>Vacsora</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Hétfő</td><td>Zabkása mandulaitallal, lenmaggal, banánnal</td><td>Grillezett csirkemell, barna rizs, olívaolajos saláta</td><td>Dió + alma</td><td>Párolt zöldségek + főtt tojás</td></tr>
+              <tr><td>Kedd</td><td>Avokádós teljes kiőrlésű kenyér paradicsommal</td><td>Lazac (vagy tonhal) édesburgonyával</td><td>Kefir vagy növényi joghurt chia maggal</td><td>Zöldséges rizottó olívaolajjal</td></tr>
+              <tr><td>Szerda</td><td>Zabpalacsinta mogyoróvajjal</td><td>Pulykamell kuszkusszal, uborkasalátával</td><td>Tökmag</td><td>Lencsefőzelék + főtt tojás</td></tr>
+              <tr><td>Csütörtök</td><td>Gyümölcsturmix (banán, bogyósok, zabital)</td><td>Csirkemell, quinoa, zöldbab</td><td>Narancs + mandula</td><td>Zöldségleves + teljes kiőrlésű pirítós</td></tr>
+              <tr><td>Péntek</td><td>Zabkeksz + kamillatea</td><td>Tonhalsaláta (tonhal, kukorica, uborka, olívaolaj, citrom)</td><td>Dió vagy kesudió</td><td>Párolt zöldségek + rántotta</td></tr>
+              <tr><td>Szombat</td><td>Teljes kiőrlésű pirítós humusszal</td><td>Sült csirkecomb, bulgur, saláta</td><td>Alma + mandula</td><td>Zöldséges tészta (teljes kiőrlésű)</td></tr>
+              <tr><td>Vasárnap</td><td>Tojásrántotta zöldségekkel</td><td>Lazacos / tonhalas rizs salátával</td><td>Joghurttal kevert zab</td><td>Sült zöldség, kevés rizs</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- RECEPTEK -->
+    <section id="view-receptek" class="hidden" role="region" aria-labelledby="tab-receptek">
+      <div class="card">
+        <h2>Recept: Zabkása mandulaitallal</h2>
+
+        <!-- Beépített illusztráció (inline SVG, nem kell külön fájl) -->
+        <div aria-hidden="true" style="max-width:560px;margin:6px 0 12px;">
+          <svg viewBox="0 0 560 320" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;border-radius:10px;border:1px solid #e5e5e5;background:#fcfcfc">
+            <defs>
+              <linearGradient id="g1" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#f2f7f4"/>
+                <stop offset="1" stop-color="#e6efe9"/>
+              </linearGradient>
+            </defs>
+            <rect x="0" y="0" width="560" height="320" fill="url(#g1)"/>
+            <!-- tál -->
+            <ellipse cx="280" cy="240" rx="170" ry="38" fill="#d5e7dd"/>
+            <path d="M110,210 a170,50 0 1,0 340,0 v20 a170,50 0 1,1 -340,0z" fill="#9ac9b3"/>
+            <!-- zabkása -->
+            <ellipse cx="280" cy="210" rx="160" ry="40" fill="#f0e1bd"/>
+            <!-- banán szeletek -->
+            <g fill="#f8eb96" stroke="#e2d26f" stroke-width="2">
+              <ellipse cx="220" cy="205" rx="24" ry="12"/>
+              <ellipse cx="260" cy="200" rx="24" ry="12"/>
+              <ellipse cx="300" cy="205" rx="24" ry="12"/>
+              <ellipse cx="340" cy="200" rx="24" ry="12"/>
+            </g>
+            <!-- lenmag pöttyök -->
+            <g fill="#8a5a3a">
+              <circle cx="245" cy="215" r="3"/><circle cx="290" cy="212" r="3"/><circle cx="325" cy="218" r="3"/>
+              <circle cx="210" cy="210" r="3"/><circle cx="360" cy="210" r="3"/>
+            </g>
+            <!-- dísz levél -->
+            <path d="M175,195 q20,-25 45,-5 q-25,10 -45,5z" fill="#4aa37f"/>
+          </svg>
+        </div>
+
+        <div class="recipe-meta">
+          <span>⏱ 10–12 perc</span>
+          <span>🍽 1–2 adag</span>
+          <span>🥣 könnyű</span>
+        </div>
+
+        <p><strong>Hozzávalók:</strong></p>
+        <ul>
+          <li>60 g zabpehely</li>
+          <li>250 ml mandulaital (vagy más növényi tej)</li>
+          <li>1 kisebb banán, szeletelve</li>
+          <li>1 evőkanál lenmag (őrölve jobb)</li>
+          <li>csipet só, ízlés szerint fahéj</li>
+        </ul>
+
+        <p><strong>Elkészítés:</strong></p>
+        <ol>
+          <li>A mandulaitalt forrald fel egy kis lábasban csipet sóval.</li>
+          <li>Szórd bele a zabpelyhet, keverd el, majd közepes lángon 3–5 percig főzd sűrűsödésig.</li>
+          <li>Vedd le a tűzről, keverd bele a fahéjat és a lenmagot.</li>
+          <li>Tálald a tetején banánszeletekkel. (Plusz: bogyós gyümölcs, dió se árt.)</li>
+        </ol>
+
+        <p class="small">Tipp: Ha selymesebbet szeretnél, főzés után 1–2 percet pihentesd lefedve.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer> Tipp: ha újra megnyitod ezt az oldalt a telefonon, a pipák megmaradnak ezen az eszközön. </footer>
+
+  <script>
+    (function(){
+      var tabLista = document.getElementById('tab-lista');
+      var tabEtrend = document.getElementById('tab-etrend');
+      var tabReceptek = document.getElementById('tab-receptek');
+      var viewLista = document.getElementById('view-lista');
+      var viewEtrend = document.getElementById('view-etrend');
+      var viewReceptek = document.getElementById('view-receptek');
+
+      function addClass(el, name){ if(el && el.className.indexOf(name)===-1) el.className += ' ' + name; }
+      function removeClass(el, name){ if(!el) return; el.className = el.className.replace(new RegExp('\\b'+name+'\\b','g'),'').replace(/\s+/g,' ').trim(); }
+
+      function show(tab){
+        if(tab==='lista'){
+          addClass(tabLista,'active'); removeClass(tabEtrend,'active'); removeClass(tabReceptek,'active');
+          removeClass(viewLista,'hidden'); addClass(viewEtrend,'hidden'); addClass(viewReceptek,'hidden');
+          tabLista.setAttribute('aria-selected','true'); tabEtrend.setAttribute('aria-selected','false'); tabReceptek.setAttribute('aria-selected','false');
+        }else if(tab==='etrend'){
+          addClass(tabEtrend,'active'); removeClass(tabLista,'active'); removeClass(tabReceptek,'active');
+          removeClass(viewEtrend,'hidden'); addClass(viewLista,'hidden'); addClass(viewReceptek,'hidden');
+          tabEtrend.setAttribute('aria-selected','true'); tabLista.setAttribute('aria-selected','false'); tabReceptek.setAttribute('aria-selected','false');
+        }else if(tab==='receptek'){
+          addClass(tabReceptek,'active'); removeClass(tabLista,'active'); removeClass(tabEtrend,'active');
+          removeClass(viewReceptek,'hidden'); addClass(viewLista,'hidden'); addClass(viewEtrend,'hidden');
+          tabReceptek.setAttribute('aria-selected','true'); tabLista.setAttribute('aria-selected','false'); tabEtrend.setAttribute('aria-selected','false');
+        }
+      }
+
+      if(tabLista && tabEtrend && tabReceptek){
+        tabLista.addEventListener('click', function(){ show('lista'); });
+        tabEtrend.addEventListener('click', function(){ show('etrend'); });
+        tabReceptek.addEventListener('click', function(){ show('receptek'); });
+      }
+
+      var STORAGE_KEY = 'bevasarlolista_singlefile_v3';
+      function loadState(){
+        try{
+          var raw = localStorage.getItem(STORAGE_KEY) || '{}';
+          var saved = JSON.parse(raw);
+          var boxes = document.querySelectorAll('input[type=checkbox]');
+          for(var i=0;i<boxes.length;i++){
+            var id = boxes[i].id;
+            if(saved.hasOwnProperty(id)) boxes[i].checked = !!saved[id];
+          }
+        }catch(e){}
+      }
+
+      function saveState(){
+        var boxes = document.querySelectorAll('input[type=checkbox]');
+        var obj = {};
+        for(var i=0;i<boxes.length;i++){ obj[boxes[i].id] = boxes[i].checked; }
+        try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(obj)); }catch(e){}
+      }
+
+      var checkAll = document.getElementById('checkAll');
+      var uncheckAll = document.getElementById('uncheckAll');
+      if(checkAll) checkAll.addEventListener('click', function(){
+        var boxes = document.querySelectorAll('input[type=checkbox]');
+        for(var i=0;i<boxes.length;i++){ boxes[i].checked = true; }
+        saveState();
+      });
+      if(uncheckAll) uncheckAll.addEventListener('click', function(){
+        var boxes = document.querySelectorAll('input[type=checkbox]');
+        for(var i=0;i<boxes.length;i++){ boxes[i].checked = false; }
+        saveState();
+      });
+
+      document.addEventListener('change', function(e){
+        var t = e.target || e.srcElement;
+        if(t && t.matches && t.matches('input[type=checkbox]')) saveState();
+      });
+
+      if(document.readyState==='loading'){ document.addEventListener('DOMContentLoaded', loadState); } else { loadState(); }
+    })();
+  </script>
+</body>
+</html>
