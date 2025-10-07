@@ -258,108 +258,118 @@
   <footer> Tipp: ha újra megnyitod ezt az oldalt a telefonon, a pipák megmaradnak ezen az eszközön. </footer>
 
   <script>
-  (function(){
-    // Tabok
-    var tabLista = document.getElementById('tab-lista');
-    var tabEtrend = document.getElementById('tab-etrend');
-    var tabReceptek = document.getElementById('tab-receptek');
-    var viewLista = document.getElementById('view-lista');
-    var viewEtrend = document.getElementById('view-etrend');
-    var viewReceptek = document.getElementById('view-receptek');
+(function(){
+  // Elemezendő DOM elemek
+  var tabLista = document.getElementById('tab-lista');
+  var tabEtrend = document.getElementById('tab-etrend');
+  var tabReceptek = document.getElementById('tab-receptek');
+  var viewLista = document.getElementById('view-lista');
+  var viewEtrend = document.getElementById('view-etrend');
+  var viewReceptek = document.getElementById('view-receptek');
 
-    function addClass(el, name){ if(el && el.className.indexOf(name)===-1) el.className += ' ' + name; }
-    function removeClass(el, name){ if(!el) return; el.className = el.className.replace(new RegExp('\\b'+name+'\\b','g'),'').replace(/\s+/g,' ').trim(); }
+  function addClass(el, name){ if(el && el.className.indexOf(name)===-1) el.className += ' ' + name; }
+  function removeClass(el, name){ if(!el) return; el.className = el.className.replace(new RegExp('\\b'+name+'\\b','g'),'').replace(/\s+/g,' ').trim(); }
 
-    function show(tab){
-      if(tab==='lista'){
-        addClass(tabLista,'active'); removeClass(tabEtrend,'active'); removeClass(tabReceptek,'active');
-        removeClass(viewLista,'hidden'); addClass(viewEtrend,'hidden'); addClass(viewReceptek,'hidden');
-        tabLista.setAttribute('aria-selected','true'); tabEtrend.setAttribute('aria-selected','false'); tabReceptek.setAttribute('aria-selected','false');
-      }else if(tab==='etrend'){
-        addClass(tabEtrend,'active'); removeClass(tabLista,'active'); removeClass(tabReceptek,'active');
-        removeClass(viewEtrend,'hidden'); addClass(viewLista,'hidden'); addClass(viewReceptek,'hidden');
-        tabEtrend.setAttribute('aria-selected','true'); tabLista.setAttribute('aria-selected','false'); tabReceptek.setAttribute('aria-selected','false');
-      }else if(tab==='receptek'){
-        addClass(tabReceptek,'active'); removeClass(tabLista,'active'); removeClass(tabEtrend,'active');
-        removeClass(viewReceptek,'hidden'); addClass(viewLista,'hidden'); addClass(viewEtrend,'hidden');
-        tabReceptek.setAttribute('aria-selected','true'); tabLista.setAttribute('aria-selected','false'); tabEtrend.setAttribute('aria-selected','false');
-      }
-      // <<< ÚJ: a hash-ben megőrizzük, melyik fül aktív
-      location.hash = '#view-' + tab;
+  // Fülváltó – a végén a hash-t is frissítjük, hogy a "Vissza" tényleg ugyanarra a fülre hozzon
+  function show(tab){
+    if(tab==='lista'){
+      addClass(tabLista,'active'); removeClass(tabEtrend,'active'); removeClass(tabReceptek,'active');
+      removeClass(viewLista,'hidden'); addClass(viewEtrend,'hidden'); addClass(viewReceptek,'hidden');
+      tabLista.setAttribute('aria-selected','true'); tabEtrend.setAttribute('aria-selected','false'); tabReceptek.setAttribute('aria-selected','false');
+    }else if(tab==='etrend'){
+      addClass(tabEtrend,'active'); removeClass(tabLista,'active'); removeClass(tabReceptek,'active');
+      removeClass(viewEtrend,'hidden'); addClass(viewLista,'hidden'); addClass(viewReceptek,'hidden');
+      tabEtrend.setAttribute('aria-selected','true'); tabLista.setAttribute('aria-selected','false'); tabReceptek.setAttribute('aria-selected','false');
+    }else if(tab==='receptek'){
+      addClass(tabReceptek,'active'); removeClass(tabLista,'active'); removeClass(tabEtrend,'active');
+      removeClass(viewReceptek,'hidden'); addClass(viewLista,'hidden'); addClass(viewEtrend,'hidden');
+      tabReceptek.setAttribute('aria-selected','true'); tabLista.setAttribute('aria-selected','false'); tabEtrend.setAttribute('aria-selected','false');
     }
-
-    if(tabLista && tabEtrend && tabReceptek){
-      tabLista.addEventListener('click', function(){ show('lista'); });
-      tabEtrend.addEventListener('click', function(){ show('etrend'); });
-      tabReceptek.addEventListener('click', function(){ show('receptek'); });
+    // Hash frissítése (history.replaceState, hogy ne szemeteljünk új előzménybejegyzést minden kattintásnál)
+    var targetHash = '#view-' + tab;
+    if (location.hash !== targetHash) {
+      history.replaceState(null, '', targetHash);
     }
+  }
 
-    // Bevásárlólista mentés
-    var STORAGE_KEY = 'bevasarlolista_clickable_v2';
-    function loadState(){
-      try{
-        var raw = localStorage.getItem(STORAGE_KEY) || '{}';
-        var saved = JSON.parse(raw);
-        var boxes = document.querySelectorAll('input[type=checkbox]');
-        for(var i=0;i<boxes.length;i++){
-          var id = boxes[i].id;
-          if(saved.hasOwnProperty(id)) boxes[i].checked = !!saved[id];
-        }
-      }catch(e){}
-    }
-    function saveState(){
+  // Gombok bekötése
+  if(tabLista && tabEtrend && tabReceptek){
+    tabLista.addEventListener('click', function(){ show('lista'); });
+    tabEtrend.addEventListener('click', function(){ show('etrend'); });
+    tabReceptek.addEventListener('click', function(){ show('receptek'); });
+  }
+
+  // Bevásárlólista – állapotmentés
+  var STORAGE_KEY = 'bevasarlolista_clickable_v2';
+  function loadState(){
+    try{
+      var raw = localStorage.getItem(STORAGE_KEY) || '{}';
+      var saved = JSON.parse(raw);
       var boxes = document.querySelectorAll('input[type=checkbox]');
-      var obj = {};
-      for(var i=0;i<boxes.length;i++){ obj[boxes[i].id] = boxes[i].checked; }
-      try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(obj)); }catch(e){}
-    }
-    var checkAll = document.getElementById('checkAll');
-    var uncheckAll = document.getElementById('uncheckAll');
-    if(checkAll) checkAll.addEventListener('click', function(){
-      var boxes = document.querySelectorAll('input[type=checkbox]');
-      for(var i=0;i<boxes.length;i++){ boxes[i].checked = true; }
-      saveState();
-    });
-    if(uncheckAll) uncheckAll.addEventListener('click', function(){
-      var boxes = document.querySelectorAll('input[type=checkbox]');
-      for(var i=0;i<boxes.length;i++){ boxes[i].checked = false; }
-      saveState();
-    });
-    document.addEventListener('change', function(e){
-      var t = e.target || e.srcElement;
-      if(t && t.matches && t.matches('input[type=checkbox]')) saveState();
-    });
-
-    // Hash alapú navigáció: #recept-... → Recepteket mutat + odagörget
-    function handleHash(){
-      if(location.hash && location.hash.indexOf('#recept-')===0){
-        show('receptek');
-        try {
-          var target = document.getElementById(location.hash.substring(1));
-          if(target){ target.scrollIntoView({behavior:'smooth', block:'start'}); }
-        } catch(e){}
+      for(var i=0;i<boxes.length;i++){
+        var id = boxes[i].id;
+        if(saved.hasOwnProperty(id)) boxes[i].checked = !!saved[id];
       }
-    }
-    window.addEventListener('hashchange', handleHash);
+    }catch(e){}
+  }
+  function saveState(){
+    var boxes = document.querySelectorAll('input[type=checkbox]');
+    var obj = {};
+    for(var i=0;i<boxes.length;i++){ obj[boxes[i].id] = boxes[i].checked; }
+    try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(obj)); }catch(e){}
+  }
+  var checkAll = document.getElementById('checkAll');
+  var uncheckAll = document.getElementById('uncheckAll');
+  if(checkAll) checkAll.addEventListener('click', function(){
+    var boxes = document.querySelectorAll('input[type=checkbox]');
+    for(var i=0;i<boxes.length;i++){ boxes[i].checked = true; }
+    saveState();
+  });
+  if(uncheckAll) uncheckAll.addEventListener('click', function(){
+    var boxes = document.querySelectorAll('input[type=checkbox]');
+    for(var i=0;i<boxes.length;i++){ boxes[i].checked = false; }
+    saveState();
+  });
+  document.addEventListener('change', function(e){
+    var t = e.target || e.srcElement;
+    if(t && t.matches && t.matches('input[type=checkbox]')) saveState();
+  });
 
-    // Init
-    if(document.readyState==='loading'){ document.addEventListener('DOMContentLoaded', function(){ loadState(); handleHash(); }); }
-    else { loadState(); handleHash(); }
-      // Hash alapú tab-váltás (#view-lista / #view-etrend / #view-receptek)
-      function handleTabHash(){
-        if(location.hash === '#view-receptek') show('receptek');
-        else if(location.hash === '#view-etrend') show('etrend');
-        else if(location.hash === '#view-lista') show('lista');
-      }
-      handleTabHash();
-      window.addEventListener('hashchange', handleTabHash);
-
-    // Ha a hash a #view-receptek, akkor automatikusan nyissa meg a Recepteket
-    if(location.hash === '#view-receptek'){
+  // #recept-... hash: Recepteket mutat + odagörget az adott cikkhez
+  function handleRecipeHash(){
+    if(location.hash && location.hash.indexOf('#recept-')===0){
       show('receptek');
+      try {
+        var target = document.getElementById(location.hash.substring(1));
+        if(target){ target.scrollIntoView({behavior:'smooth', block:'start'}); }
+      } catch(e){}
     }
+  }
 
-  })();
-  </script>
-</body>
-</html>
+  // #view-... hash: konkrét fül megnyitása
+  function handleTabHash(){
+    var h = location.hash || '';
+    if (h === '#view-receptek') show('receptek');
+    else if (h === '#view-etrend') show('etrend');
+    else if (h === '#view-lista') show('lista');
+    else show('lista'); // alapértelmezett
+  }
+
+  // Betöltéskor
+  document.addEventListener('DOMContentLoaded', function(){
+    loadState();
+    // Előbb fül nyitása a hash alapján, aztán (ha recept-ankor), odagörgetés
+    handleTabHash();
+    handleRecipeHash();
+  });
+
+  // Hash változásakor
+  window.addEventListener('hashchange', function(){
+    if (location.hash.indexOf('#recept-')===0) {
+      handleRecipeHash();
+    } else {
+      handleTabHash();
+    }
+  });
+})();
+</script>
