@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Bevásárlólista + Heti étrend + Receptek (képekkel)</title>
-  <meta name="description" content="Bevásárlólista, heti étrend és receptek. Az étrend táblázatban az ételek kattinthatók és a megfelelő recepthez ugranak. Receptenként fotó." />
+  <meta name="description" content="Bevásárlólista, heti étrend és receptek. Az étrend táblázatban az ételek linkjei a külön receptoldalakra mutatnak. Receptenként fotó." />
   <style>
     :root { --gap:12px; --pad:12px; --radius:12px; --brand:#2a775a; }
     * { box-sizing:border-box; }
@@ -41,38 +41,39 @@
     .recipe-meta span { background:#f6f7f9; border:1px solid #e5e5e5; border-radius:999px; padding:.25rem .55rem; }
     .recipes article { scroll-margin-top:120px; }
     .recipe-img { width:100%; max-width:560px; display:block; border-radius:10px; border:1px solid #e5e5e5; margin:6px 0 12px; object-fit:cover; }
-  /* === Középre igazított elrendezés az egész oldalra === */
-        main { display: flex; justify-content: center; }
-        main > section { width: 100%; max-width: 900px; }
-        .card { margin-left: auto; margin-right: auto; }
-        #view-lista .card h2, #view-etrend .card h2, #view-receptek .card h2 { text-align: center; }
-        .plan table { margin: 0 auto; } /* étrend táblázat középre */
-        
-        /* === Receptek: minden elem ugyanabba a hasábba (kép szélessége) === */
-        .recipes .card > .recipe-img,
-        .recipes .card > .recipe-meta,
-        .recipes .card > p,
-        .recipes .card > ul,
-        .recipes .card > ol {
-          max-width: 560px;       /* ugyanaz, mint a képnél */
-          margin-left: auto;
-          margin-right: auto;     /* középre igazítás */
-        }
-        
-        /* Szöveg igazítása a hasábon belül */
-        .recipes .card p,
-        .recipes .card ul,
-        .recipes .card ol { text-align: left; line-height: 1.55; }
-        
-        /* Mobil finomhangolás */
-        @media (max-width: 600px) {
-          body { font-size: 16px; }
-          nav { flex-direction: column; }
-          nav button { width: 100%; font-size: 1rem; padding: 12px; }
-          .card { padding: 14px; }
-          .recipe-img { max-width: 100%; height: auto; }
-          ul { padding-left: 20px; margin-top: 4px; margin-bottom: 8px; }
-        }
+
+    /* === Középre igazított elrendezés az egész oldalra === */
+    main { display: flex; justify-content: center; }
+    main > section { width: 100%; max-width: 900px; }
+    .card { margin-left: auto; margin-right: auto; }
+    #view-lista .card h2, #view-etrend .card h2, #view-receptek .card h2 { text-align: center; }
+    .plan table { margin: 0 auto; } /* étrend táblázat középre */
+
+    /* === Receptek: minden elem ugyanabba a hasábba (kép szélessége) === */
+    .recipes .card > .recipe-img,
+    .recipes .card > .recipe-meta,
+    .recipes .card > p,
+    .recipes .card > ul,
+    .recipes .card > ol {
+      max-width: 560px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* Szöveg igazítása a hasábon belül */
+    .recipes .card p,
+    .recipes .card ul,
+    .recipes .card ol { text-align: left; line-height: 1.55; }
+
+    /* Mobil finomhangolás */
+    @media (max-width: 600px) {
+      body { font-size: 16px; }
+      nav { flex-direction: column; }
+      nav button { width: 100%; font-size: 1rem; padding: 12px; }
+      .card { padding: 14px; }
+      .recipe-img { max-width: 100%; height: auto; }
+      ul { padding-left: 20px; margin-top: 4px; margin-bottom: 8px; }
+    }
   </style>
 </head>
 <body>
@@ -152,11 +153,11 @@
       </section>
     </section>
 
-    <!-- ÉTREND (kattintható linkek a receptekhez) -->
+    <!-- ÉTREND (kattintható linkek CSAK a külön receptoldalakra) -->
     <section id="view-etrend" class="hidden" role="region" aria-labelledby="tab-etrend">
       <div class="card plan">
         <h2>Heti étrend – kattints egy ételre a recepthez</h2>
-        <div class="small" style="margin-bottom:8px;">A link a „Receptek” fülön a megfelelő leíráshoz ugrik.</div>
+        <div class="small" style="margin-bottom:8px;">A link a <b>külön receptoldalra</b> visz.</div>
         <div style="overflow-x:auto;">
           <table>
             <thead>
@@ -165,52 +166,52 @@
             <tbody>
               <tr>
                 <td>Hétfő</td>
-                <td><a href="#recept-zabkasa">Zabkása mandulaitallal, lenmaggal, banánnal</a></td>
-                <td><a href="#recept-grillezett-csirkemell-salata">Grillezett csirkemell, barna rizs, olívaolajos saláta</a></td>
-                <td><a href="#recept-snack-dio-alma">Dió + alma</a></td>
-                <td><a href="#recept-parolt-zoldseg-rantotta">Párolt zöldségek + főtt tojás</a></td>
+                <td><a href="recept-zabkasa.html">Zabkása mandulaitallal, lenmaggal, banánnal</a></td>
+                <td><a href="recept-grillezett-csirkemell.html">Grillezett csirkemell, barna rizs, olívaolajos saláta</a></td>
+                <td>Dió + alma</td>
+                <td>Párolt zöldségek + főtt tojás</td>
               </tr>
               <tr>
                 <td>Kedd</td>
-                <td><a href="#recept-avokados-kenyer">Avokádós teljes kiőrlésű kenyér paradicsommal</a></td>
-                <td><a href="#recept-lazac-edesburgonyaval">Lazac (vagy tonhal) édesburgonyával</a></td>
-                <td><a href="#recept-joghurt-chia">Kefir vagy növényi joghurt chia maggal</a></td>
-                <td><a href="#recept-zoldseges-rizotto">Zöldséges rizottó olívaolajjal</a></td>
+                <td>Avokádós teljes kiőrlésű kenyér paradicsommal</td>
+                <td><a href="recept-lazac.html">Lazac (vagy tonhal) édesburgonyával</a></td>
+                <td>Kefir vagy növényi joghurt chia maggal</td>
+                <td>Zöldséges rizottó olívaolajjal</td>
               </tr>
               <tr>
                 <td>Szerda</td>
-                <td><a href="#recept-zabpalacsinta-mogyorovaj">Zabpalacsinta mogyoróvajjal</a></td>
-                <td><a href="#recept-pulykamell-kuszkusszal">Pulykamell kuszkusszal, uborkasalátával</a></td>
-                <td><a href="#recept-snack-tokmag">Tökmag</a></td>
-                <td><a href="#recept-lencsefozelek-tojas">Lencsefőzelék + főtt tojás</a></td>
+                <td>Zabpalacsinta mogyoróvajjal</td>
+                <td>Pulykamell kuszkusszal, uborkasalátával</td>
+                <td>Tökmag</td>
+                <td>Lencsefőzelék + főtt tojás</td>
               </tr>
               <tr>
                 <td>Csütörtök</td>
-                <td><a href="#recept-gyumolcsturmix">Gyümölcsturmix (banán, bogyósok, zabital)</a></td>
-                <td><a href="#recept-csirkemell-quinoa-zoldbab">Csirkemell, quinoa, zöldbab</a></td>
-                <td><a href="#recept-snack-narancs-mandula">Narancs + mandula</a></td>
-                <td><a href="#recept-zoldsegleves-piritos">Zöldségleves + teljes kiőrlésű pirítós</a></td>
+                <td>Gyümölcsturmix (banán, bogyósok, zabital)</td>
+                <td>Csirkemell, quinoa, zöldbab</td>
+                <td>Narancs + mandula</td>
+                <td>Zöldségleves + teljes kiőrlésű pirítós</td>
               </tr>
               <tr>
                 <td>Péntek</td>
-                <td><a href="#recept-snack-zabkeksz-tea">Zabkeksz + kamillatea</a></td>
-                <td><a href="#recept-tonhalsalata">Tonhalsaláta</a></td>
-                <td><a href="#recept-snack-dio-kesudio">Dió vagy kesudió</a></td>
-                <td><a href="#recept-parolt-zoldseg-rantotta">Párolt zöldségek + rántotta</a></td>
+                <td>Zabkeksz + kamillatea</td>
+                <td><a href="recept-tonhalsalata.html">Tonhalsaláta</a></td>
+                <td>Dió vagy kesudió</td>
+                <td>Párolt zöldségek + rántotta</td>
               </tr>
               <tr>
                 <td>Szombat</td>
-                <td><a href="#recept-humuszos-piritos">Teljes kiőrlésű pirítós humusszal</a></td>
-                <td><a href="#recept-sult-csirkecomb-bulgur-salata">Sült csirkecomb, bulgur, saláta</a></td>
-                <td><a href="#recept-snack-alma-mandula">Alma + mandula</a></td>
-                <td><a href="#recept-zoldseges-teszta">Zöldséges tészta (teljes kiőrlésű)</a></td>
+                <td>Teljes kiőrlésű pirítós humusszal</td>
+                <td>Sült csirkecomb, bulgur, saláta</td>
+                <td>Alma + mandula</td>
+                <td>Zöldséges tészta (teljes kiőrlésű)</td>
               </tr>
               <tr>
                 <td>Vasárnap</td>
-                <td><a href="#recept-rantotta-zoldseggel">Tojásrántotta zöldségekkel</a></td>
-                <td><a href="#recept-lazacos-vagy-tonhalas-rizs-salataval">Lazacos / tonhalas rizs salátával</a></td>
-                <td><a href="#recept-joghurtos-zab">Joghurttal kevert zab</a></td>
-                <td><a href="#recept-sult-zoldseg-rizzsel">Sült zöldség, kevés rizs</a></td>
+                <td>Tojásrántotta zöldségekkel</td>
+                <td>Lazacos / tonhalas rizs salátával</td>
+                <td>Joghurttal kevert zab</td>
+                <td>Sült zöldség, kevés rizs</td>
               </tr>
             </tbody>
           </table>
@@ -218,39 +219,39 @@
       </div>
     </section>
 
-    <!-- RECEPTEK -->
+    <!-- RECEPTEK – miniképes rács a külön oldalakra -->
     <section id="view-receptek" class="hidden" role="region" aria-labelledby="tab-receptek">
-  <div class="card">
-    <h2>Receptek</h2>
-    <p class="small">Koppints egy képre vagy címre a recept külön oldalához.</p>
+      <div class="card">
+        <h2>Receptek</h2>
+        <p class="small">Koppints egy képre vagy címre a recept külön oldalához.</p>
 
-    <div style="display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:12px;">
-      <!-- Zabkása -->
-      <a href="recept-zabkasa.html" style="display:block; text-decoration:none; color:inherit; border:1px solid #e5e5e5; border-radius:12px; background:#fff; overflow:hidden;">
-        <img src="images/zabkasa.png" alt="Zabkása" style="width:100%; height:140px; object-fit:cover; display:block;">
-        <div style="padding:10px; font-weight:600;">Zabkása mandulaitallal, lenmaggal, banánnal</div>
-      </a>
+        <div style="display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:12px;">
+          <!-- Zabkása -->
+          <a href="recept-zabkasa.html" style="display:block; text-decoration:none; color:inherit; border:1px solid #e5e5e5; border-radius:12px; background:#fff; overflow:hidden;">
+            <img src="images/zabkasa.png" alt="Zabkása" style="width:100%; height:140px; object-fit:cover; display:block;">
+            <div style="padding:10px; font-weight:600;">Zabkása mandulaitallal, lenmaggal, banánnal</div>
+          </a>
 
-      <!-- Grillezett csirkemell -->
-      <a href="recept-grillezett-csirkemell.html" style="display:block; text-decoration:none; color:inherit; border:1px solid #e5e5e5; border-radius:12px; background:#fff; overflow:hidden;">
-        <img src="images/grillezett_csirkemell_salata.png" alt="Grillezett csirkemell salátával" style="width:100%; height:140px; object-fit:cover; display:block;">
-        <div style="padding:10px; font-weight:600;">Grillezett csirkemell, barna rizs, olívaolajos saláta</div>
-      </a>
+          <!-- Grillezett csirkemell -->
+          <a href="recept-grillezett-csirkemell.html" style="display:block; text-decoration:none; color:inherit; border:1px solid #e5e5e5; border-radius:12px; background:#fff; overflow:hidden;">
+            <img src="images/grillezett_csirkemell_salata.png" alt="Grillezett csirkemell salátával" style="width:100%; height:140px; object-fit:cover; display:block;">
+            <div style="padding:10px; font-weight:600;">Grillezett csirkemell, barna rizs, olívaolajos saláta</div>
+          </a>
 
-      <!-- Tonhalsaláta -->
-      <a href="recept-tonhalsalata.html" style="display:block; text-decoration:none; color:inherit; border:1px solid #e5e5e5; border-radius:12px; background:#fff; overflow:hidden;">
-        <img src="images/tonhalsalata.png" alt="Tonhalsaláta" style="width:100%; height:140px; object-fit:cover; display:block;">
-        <div style="padding:10px; font-weight:600;">Tonhalsaláta</div>
-      </a>
+          <!-- Tonhalsaláta -->
+          <a href="recept-tonhalsalata.html" style="display:block; text-decoration:none; color:inherit; border:1px solid #e5e5e5; border-radius:12px; background:#fff; overflow:hidden;">
+            <img src="images/tonhalsalata.png" alt="Tonhalsaláta" style="width:100%; height:140px; object-fit:cover; display:block;">
+            <div style="padding:10px; font-weight:600;">Tonhalsaláta</div>
+          </a>
 
-      <!-- Lazac -->
-      <a href="recept-lazac.html" style="display:block; text-decoration:none; color:inherit; border:1px solid #e5e5e5; border-radius:12px; background:#fff; overflow:hidden;">
-        <img src="images/lazac_edesburgonyaval.png" alt="Lazac édesburgonyával" style="width:100%; height:140px; object-fit:cover; display:block;">
-        <div style="padding:10px; font-weight:600;">Lazac (vagy tonhal) édesburgonyával</div>
-      </a>
-    </div>
-  </div>
-</section>
+          <!-- Lazac -->
+          <a href="recept-lazac.html" style="display:block; text-decoration:none; color:inherit; border:1px solid #e5e5e5; border-radius:12px; background:#fff; overflow:hidden;">
+            <img src="images/lazac_edesburgonyaval.png" alt="Lazac édesburgonyával" style="width:100%; height:140px; object-fit:cover; display:block;">
+            <div style="padding:10px; font-weight:600;">Lazac (vagy tonhal) édesburgonyával</div>
+          </a>
+        </div>
+      </div>
+    </section>
 
   </main>
 
@@ -342,10 +343,11 @@
     // Init
     if(document.readyState==='loading'){ document.addEventListener('DOMContentLoaded', function(){ loadState(); handleHash(); }); }
     else { loadState(); handleHash(); }
+
     // Ha a hash a #view-receptek, akkor automatikusan nyissa meg a Recepteket
-if(location.hash === '#view-receptek'){
-  show('receptek');
-}
+    if(location.hash === '#view-receptek'){
+      show('receptek');
+    }
 
   })();
   </script>
