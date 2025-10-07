@@ -284,6 +284,8 @@
         removeClass(viewReceptek,'hidden'); addClass(viewLista,'hidden'); addClass(viewEtrend,'hidden');
         tabReceptek.setAttribute('aria-selected','true'); tabLista.setAttribute('aria-selected','false'); tabEtrend.setAttribute('aria-selected','false');
       }
+      // <<< ÚJ: a hash-ben megőrizzük, melyik fül aktív
+      location.hash = '#view-' + tab;
     }
 
     if(tabLista && tabEtrend && tabReceptek){
@@ -343,6 +345,14 @@
     // Init
     if(document.readyState==='loading'){ document.addEventListener('DOMContentLoaded', function(){ loadState(); handleHash(); }); }
     else { loadState(); handleHash(); }
+      // Hash alapú tab-váltás (#view-lista / #view-etrend / #view-receptek)
+      function handleTabHash(){
+        if(location.hash === '#view-receptek') show('receptek');
+        else if(location.hash === '#view-etrend') show('etrend');
+        else if(location.hash === '#view-lista') show('lista');
+      }
+      handleTabHash();
+      window.addEventListener('hashchange', handleTabHash);
 
     // Ha a hash a #view-receptek, akkor automatikusan nyissa meg a Recepteket
     if(location.hash === '#view-receptek'){
