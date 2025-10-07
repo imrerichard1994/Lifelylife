@@ -220,91 +220,38 @@
 
     <!-- RECEPTEK -->
     <section id="view-receptek" class="hidden" role="region" aria-labelledby="tab-receptek">
-      <div class="card"><h2>Receptek</h2><p class="small">Az étrend táblázatban egy ételre kattintva ide ugrik a megfelelő recepthez.</p></div>
+  <div class="card">
+    <h2>Receptek</h2>
+    <p class="small">Koppints egy képre vagy címre a recept külön oldalához.</p>
 
-      <div class="recipes">
-        <article id="recept-zabkasa" class="card">
-          <h3>Zabkása mandulaitallal, lenmaggal, banánnal</h3>
-          <img class="recipe-img" src="images/zabkasa.png" alt="Zabkása mandulaitallal és banánnal">
-          <div class="recipe-meta"><span>⏱ 10–12 perc</span><span>🍽 1 adag</span><span>🥣 könnyű</span></div>
-          <p><strong>Hozzávalók (1 adag):</strong></p>
-          <ul>
-            <li>50 g zabpehely</li>
-            <li>200 ml mandulaital</li>
-            <li>½ banán (kb. 50 g)</li>
-            <li>1 teáskanál (5 g) őrölt lenmag</li>
-            <li>¼ teáskanál fahéj</li>
-            <li>1 csipet só</li>
-          </ul>
-          <p><strong>Elkészítés:</strong><br>
-          Forrald fel a mandulaitalt, add hozzá a zabpelyhet és főzd 3–5 percig.  
-          Keverd bele a fahéjat és a lenmagot, tálaláskor tedd rá a szeletelt banánt.</p>
-        </article>
+    <div style="display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:12px;">
+      <!-- Zabkása -->
+      <a href="recept-zabkasa.html" style="display:block; text-decoration:none; color:inherit; border:1px solid #e5e5e5; border-radius:12px; background:#fff; overflow:hidden;">
+        <img src="images/zabkasa.png" alt="Zabkása" style="width:100%; height:140px; object-fit:cover; display:block;">
+        <div style="padding:10px; font-weight:600;">Zabkása mandulaitallal, lenmaggal, banánnal</div>
+      </a>
 
+      <!-- Grillezett csirkemell -->
+      <a href="recept-grillezett-csirkemell.html" style="display:block; text-decoration:none; color:inherit; border:1px solid #e5e5e5; border-radius:12px; background:#fff; overflow:hidden;">
+        <img src="images/grillezett_csirkemell_salata.png" alt="Grillezett csirkemell salátával" style="width:100%; height:140px; object-fit:cover; display:block;">
+        <div style="padding:10px; font-weight:600;">Grillezett csirkemell, barna rizs, olívaolajos saláta</div>
+      </a>
 
+      <!-- Tonhalsaláta -->
+      <a href="recept-tonhalsalata.html" style="display:block; text-decoration:none; color:inherit; border:1px solid #e5e5e5; border-radius:12px; background:#fff; overflow:hidden;">
+        <img src="images/tonhalsalata.png" alt="Tonhalsaláta" style="width:100%; height:140px; object-fit:cover; display:block;">
+        <div style="padding:10px; font-weight:600;">Tonhalsaláta</div>
+      </a>
 
-        <article id="recept-grillezett-csirkemell-salata" class="card">
-          <h3>Grillezett csirkemell, barna rizs, olívaolajos saláta</h3>
-          <img class="recipe-img" src="images/grillezett_csirkemell_salata.png" alt="Grillezett csirkemell rizzsel és salátával">
-          <div class="recipe-meta"><span>⏱ 25–30 perc</span><span>🍽 1 adag</span></div>
-          <p><strong>Hozzávalók (1 adag):</strong></p>
-          <ul>
-            <li>120 g csirkemellfilé</li>
-            <li>80 g főtt barna rizs (nyersen kb. 30 g)</li>
-            <li>80 g salátakeverék</li>
-            <li>1 teáskanál (5 ml) extra szűz olívaolaj</li>
-            <li>½ teáskanál citromlé</li>
-            <li>csipet só, bors</li>
-          </ul>
-          <p><strong>Elkészítés:</strong><br>
-          A csirkemellet sózd, borsozd, és grillserpenyőben süsd 2×3 percig.  
-          A rizst főzd meg, a salátát keverd össze olívaolajjal és citromlével.</p>
-        </article>
+      <!-- Lazac -->
+      <a href="recept-lazac.html" style="display:block; text-decoration:none; color:inherit; border:1px solid #e5e5e5; border-radius:12px; background:#fff; overflow:hidden;">
+        <img src="images/lazac_edesburgonyaval.png" alt="Lazac édesburgonyával" style="width:100%; height:140px; object-fit:cover; display:block;">
+        <div style="padding:10px; font-weight:600;">Lazac (vagy tonhal) édesburgonyával</div>
+      </a>
+    </div>
+  </div>
+</section>
 
-
-
-        <article id="recept-tonhalsalata" class="card">
-          <h3>Tonhalsaláta</h3>
-          <img class="recipe-img" src="images/tonhalsalata.png" alt="Tonhalsaláta kukoricával és uborkával">
-          <div class="recipe-meta"><span>⏱ 10 perc</span><span>🍽 1 adag</span></div>
-          <p><strong>Hozzávalók (1 adag):</strong></p>
-          <ul>
-            <li>100 g tonhal konzerv (vízben, lecsöpögtetve)</li>
-            <li>60 g csemegekukorica</li>
-            <li>80 g uborka</li>
-            <li>1 teáskanál (5 ml) olívaolaj</li>
-            <li>1 teáskanál citromlé</li>
-            <li>só, bors ízlés szerint</li>
-          </ul>
-          <p><strong>Elkészítés:</strong><br>
-          A hozzávalókat keverd össze egy tálban, locsold meg olívaolajjal és citromlével.  
-          Tálalás előtt hűtsd be pár percre.</p>
-        </article>
-
-
-        <article id="recept-lazac-edesburgonyaval" class="card">
-          <h3>Lazac (vagy tonhal) édesburgonyával</h3>
-          <img class="recipe-img" src="images/lazac_edesburgonyaval.png" alt="Sült lazac édesburgonyával">
-          <div class="recipe-meta"><span>⏱ 25–30 perc</span><span>🍽 1 adag</span></div>
-          <p><strong>Hozzávalók (1 adag):</strong></p>
-          <ul>
-            <li>150 g lazacfilé</li>
-            <li>200 g édesburgonya</li>
-            <li>1 teáskanál (5 ml) olívaolaj</li>
-            <li>só, bors ízlés szerint</li>
-            <li>1 szelet citrom (díszítéshez)</li>
-          </ul>
-          <p><strong>Elkészítés:</strong><br>
-          Az édesburgonyát 200°C-on süsd 25–30 percig.  
-          A lazacot sózd, borsozd, és serpenyőben süsd 2×3 percig.  
-          Tálaláskor locsold meg citrommal.</p>
-        </article>
-
-
-
-        <!-- Ide jönnek majd a többiek (ugyanígy, saját képfájlnévvel az images/ mappából) -->
-      </div>
-    </section>
   </main>
 
   <footer> Tipp: ha újra megnyitod ezt az oldalt a telefonon, a pipák megmaradnak ezen az eszközön. </footer>
