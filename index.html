@@ -4,9 +4,62 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Lifelylife</title>
+  <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-  <h1>Üdv a Lifelylife oldalon!</h1>
-  <p>Ha ezt látod Netlify-on, akkor a GitHub–Netlify kapcsolat működik.</p>
+  <header>
+    <h1>Lifelylife</h1>
+    <div class="nav">
+      <a href="/">Kezdőlap</a>
+      <a href="#rolunk">Rólunk</a>
+      <a href="#kapcsolat">Kapcsolat</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h2>Üdv a Lifelylife oldalon!</h2>
+      <p>Ez az oldal a GitHub → Netlify automatikus deploy-jal frissül. Élő link: <em>lifelylif3.netlify.app</em>.</p>
+      <div class="notice"><strong>Tipp:</strong> minden commit után a Netlify pár pillanat alatt újraépíti az oldalt.</div>
+    </section>
+
+    <section id="rolunk">
+      <h3>Rólunk</h3>
+      <p>Itt lesz pár mondat arról, miről szól az oldal. Később bővíthetjük aloldalakkal is.</p>
+    </section>
+
+    <section id="kapcsolat">
+      <h3>Kapcsolat</h3>
+      <p>Küldj üzenetet az alábbi űrlapon. A beküldések a Netlify <em>Forms</em> felületére érkeznek.</p>
+
+      <!-- Netlify Forms bekapcsolása: name + data-netlify + hidden form-name -->
+      <form name="kapcsolat" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/koszonjuk">
+        <!-- kötelező a hidden form-name mező -->
+        <input type="hidden" name="form-name" value="kapcsolat">
+        <!-- honeypot robotok ellen -->
+        <p style="display:none">
+          <label>Ne töltsd ki: <input name="bot-field"></label>
+        </p>
+
+        <div>
+          <label for="nev">Név</label>
+          <input id="nev" name="Név" required>
+        </div>
+        <div>
+          <label for="email">E-mail</label>
+          <input id="email" name="Email" type="email" required>
+        </div>
+        <div>
+          <label for="uzenet">Üzenet</label>
+          <textarea id="uzenet" name="Üzenet" required></textarea>
+        </div>
+        <button type="submit">Küldés</button>
+        <small class="muted">Az űrlap a Netlify Forms szolgáltatással működik.</small>
+      </form>
+    </section>
+  </main>
+
+  <footer>© <span id="year"></span> Lifelylife</footer>
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 </body>
 </html>
