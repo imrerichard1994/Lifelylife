@@ -342,6 +342,11 @@
     // Init
     if(document.readyState==='loading'){ document.addEventListener('DOMContentLoaded', function(){ loadState(); handleHash(); }); }
     else { loadState(); handleHash(); }
+    // Ha a hash a #view-receptek, akkor automatikusan nyissa meg a Recepteket
+if(location.hash === '#view-receptek'){
+  show('receptek');
+}
+
   })();
   </script>
 </body>
