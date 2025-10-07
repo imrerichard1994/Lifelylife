@@ -41,10 +41,19 @@
   <nav>
     <button class="active" id="tab-lista" type="button" aria-controls="view-lista" aria-selected="true">Bevásárlólista</button>
     <button id="tab-etrend" type="button" aria-controls="view-etrend" aria-selected="false">Heti étrend</button>
+<button id="tab-receptek" type="button">Receptek</button>
   </nav>
 
   <main>
     <!-- LISTA -->
+    <section id="view-receptek" class="hidden">
+  <div class="card">
+    <h2>Recept: Zabkása mandulaitallal</h2>
+    <img src="https://via.placeholder.com/400x250" alt="Zabkása" style="max-width:100%; border-radius:8px; margin-bottom:12px;">
+    <p><strong>Hozzávalók:</strong> Zabpehely, mandulaital, banán, lenmag.</p>
+    <p><strong>Elkészítés:</strong> A zabpelyhet főzd meg mandulaitalban, majd add hozzá a szeletelt banánt és egy kevés lenmagot. Egyszerű és finom reggeli!</p>
+  </div>
+</section>
     <section id="view-lista" role="region" aria-labelledby="tab-lista">
       <div class="notice small">A pipák automatikusan <b>elmentődnek</b> ezen az eszközön (helyi tároló).</div>
       <div class="controls">
@@ -135,7 +144,22 @@
   </main>
 
   <footer> Tipp: ha újra megnyitod ezt az oldalt a telefonon, a pipák megmaradnak ezen az eszközön. </footer>
+<script>
+  // A meglévő show() függvény mellé ezt illeszd be:
+  var tabReceptek = document.getElementById('tab-receptek');
+  var viewReceptek = document.getElementById('view-receptek');
 
+  // Frissítsük a show() függvényt
+  function show(tab) {
+    if (tab === 'lista') {
+      addClass(tabLista, 'active'); removeClass(tabEtrend, 'active'); removeClass(tabReceptek, 'active');
+      removeClass(viewLista, 'hidden'); addClass(viewEtrend, 'hidden'); addClass(viewReceptek, 'hidden');
+    } else if (tab === 'etrend') {
+      addClass(tabEtrend, 'active'); removeClass(tabLista, 'active'); removeClass(tabReceptek, 'active');
+      removeClass(viewEtrend, 'hidden'); addClass(viewLista, 'hidden'); addClass(viewReceptek, 'hidden');
+    } else if (tab === 'receptek') {
+      addClass(tabReceptek, 'active'); removeClass(tabLista, 'active'); removeClass(tabEtrend, 'active');
+      removeClass(viewReceptek,
   <script>
     (function(){
       var tabLista = document.getElementById('tab-lista');
