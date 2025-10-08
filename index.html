@@ -74,14 +74,20 @@
       .recipe-img { max-width: 100%; height: auto; }
       ul { padding-left: 20px; margin-top: 4px; margin-bottom: 8px; }
     }
-  /* Hover effekt a receptek minikártyáin */
-#view-receptek a {
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+      /* Hover effekt a receptek kártyáin (PC-n) */
+.recipes article {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  cursor: pointer;
+  display: inline-block;
+  width: 100%;
 }
-#view-receptek a:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+
+.recipes article:hover,
+.recipes article:has(a:hover) {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
+
   </style>
 </head>
 <body>
