@@ -81,11 +81,16 @@
   will-change: transform;
   cursor: pointer;
 }
-
 #view-receptek .card a:hover {
   transform: translateY(-5px) scale(1.02);
   box-shadow: 0 8px 20px rgba(0,0,0,0.15);
 }
+/* billentyűzet fókuszhoz is kapjon jelzést */
+#view-receptek .card a:focus-visible {
+  outline: 2px solid #2a775a;
+  outline-offset: 2px;
+}
+
 
   </style>
 </head>
