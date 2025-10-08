@@ -208,6 +208,48 @@
     */
   }
 }
+/* === Heti étrend táblázat - dark mode javítás === */
+@media (prefers-color-scheme: dark) {
+  #view-etrend .card {
+    background: rgba(25,25,25,0.9);
+    border-radius: 14px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.7);
+  }
+
+  #view-etrend table {
+    background: transparent;
+    color: #f5f5f5;
+  }
+
+  #view-etrend th {
+    background: rgba(50,50,50,0.9);
+    color: #fff;
+  }
+
+  #view-etrend td {
+    background: rgba(0,0,0,0.2);
+    color: #e8e8e8;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+
+  #view-etrend tr:nth-child(even) td {
+    background: rgba(255,255,255,0.03);
+  }
+
+  #view-etrend a {
+    color: #b6f5c4;
+    background: rgba(20,80,50,0.6);
+    padding: 6px 14px;
+    border-radius: 20px;
+    text-decoration: none;
+    display: inline-block;
+  }
+
+  #view-etrend a:hover {
+    background: rgba(40,150,100,0.8);
+    color: #fff;
+  }
+}
 
   </style>
 </head>
