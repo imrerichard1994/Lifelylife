@@ -20,7 +20,7 @@
 <body>
   <div class="wrap">
     <a class="back" href="#"
-   onclick="if(document.referrer && document.referrer.indexOf('index.html')!==-1){ history.back(); } else { window.location.href='index.html#view-receptek'; } return false;">
+   onclick="var p=new URLSearchParams(location.search).get('from'); var target=(p==='etrend'?'index.html#view-etrend':'index.html#view-receptek'); window.location.href=target; return false;">
   ← Vissza
 </a>
     <article class="card">
