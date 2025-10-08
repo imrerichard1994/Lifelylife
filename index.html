@@ -208,46 +208,55 @@
     */
   }
 }
-/* === Heti étrend táblázat - dark mode javítás === */
-@media (prefers-color-scheme: dark) {
-  #view-etrend .card {
-    background: rgba(25,25,25,0.9);
-    border-radius: 14px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.7);
+/* === Heti étrend táblázat - DARK MODE KÉNYSZERÍTETT JAVÍTÁS === */
+@media (prefers-color-scheme: dark){
+
+  /* Kártya */
+  #view-etrend .card{
+    background: rgba(22,22,22,.92) !important;
+    border-radius: 14px !important;
+    box-shadow: 0 2px 12px rgba(0,0,0,.7) !important;
   }
 
-  #view-etrend table {
-    background: transparent;
-    color: #f5f5f5;
+  /* Táblázat alap */
+  #view-etrend table{ background: transparent !important; color: #eee !important; }
+  #view-etrend thead th{
+    background: #2a2a2a !important;
+    color: #fff !important;
+    border-bottom: 1px solid #444 !important;
+  }
+  #view-etrend tbody td{
+    background: rgba(0,0,0,.25) !important;
+    color: #eaeaea !important;
+    border-bottom: 1px solid #333 !important;
+  }
+  #view-etrend tbody tr:nth-child(even) td{
+    background: rgba(255,255,255,.04) !important;
   }
 
-  #view-etrend th {
-    background: rgba(50,50,50,0.9);
-    color: #fff;
+  /* Bal első (Nap) oszlop – mindig látható, sötétebb */
+  #view-etrend tbody td:first-child,
+  #view-etrend thead th:first-child{
+    background: #222 !important;
+    color: #8ff0a4 !important;
+    border-right: 1px solid #333 !important;
   }
 
-  #view-etrend td {
-    background: rgba(0,0,0,0.2);
-    color: #e8e8e8;
-    border-bottom: 1px solid rgba(255,255,255,0.08);
+  /* Kattintható ételek – kapszula badge */
+  #view-etrend .plan a{
+    background: rgba(22,90,60,.75) !important;
+    border: 1px solid rgba(100,220,170,.25) !important;
+    color: #c8f7d9 !important;
+    padding: 6px 14px !important;
+    border-radius: 20px !important;
+    text-decoration: none !important;
+    display: inline-block !important;
+    box-shadow: inset 0 0 0 1px rgba(0,0,0,.15) !important;
   }
-
-  #view-etrend tr:nth-child(even) td {
-    background: rgba(255,255,255,0.03);
-  }
-
-  #view-etrend a {
-    color: #b6f5c4;
-    background: rgba(20,80,50,0.6);
-    padding: 6px 14px;
-    border-radius: 20px;
-    text-decoration: none;
-    display: inline-block;
-  }
-
-  #view-etrend a:hover {
-    background: rgba(40,150,100,0.8);
-    color: #fff;
+  #view-etrend .plan a:hover{
+    background: rgba(38,140,95,.9) !important;
+    border-color: rgba(140,240,195,.4) !important;
+    color: #fff !important;
   }
 }
 
