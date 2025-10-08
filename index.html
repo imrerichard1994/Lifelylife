@@ -356,6 +356,41 @@ header h1 {
     box-shadow: 0 2px 10px rgba(0,0,0,0.7) !important;
   }
 }
+/* === TOPBAR FIX: logó középre + header+nav együtt ragad === */
+.topbar{
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.topbar nav{
+  position: static !important;   /* felülírja a korábbi nav sticky-t */
+}
+
+.brand-header{
+  display: flex;
+  align-items: center;
+  justify-content: center;       /* logó középre */
+  height: 72px;
+  background: var(--brand);
+  color: #fff;
+  box-shadow: 0 2px 10px rgba(0,0,0,.12);
+  padding: 0 12px;
+}
+
+.brand-header .logo{
+  height: 56px;                  /* növeld, ha kell: 64px */
+  width: auto;
+  display: block;
+  margin: 0 auto;                /* biztos középre */
+  object-fit: contain;
+}
+
+/* Dark mód finomhangolás a top sávhoz */
+@media (prefers-color-scheme: dark){
+  .brand-header{ background:#1c1c1c; }
+  .topbar nav{ background:#111 !important; }
+}
 
   </style>
 </head>
