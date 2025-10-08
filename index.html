@@ -458,6 +458,46 @@ main{
   :root{ --brandH: 96px; --navH: 52px; }
   .brand-header .logo{ height: calc(var(--brandH) * 0.8); }
 }
+/* === LOGÓ NAGYOBB, FEJLÉC NEM NŐ === */
+:root{
+  --brandH: 80px;   /* a fejléc (logós sáv) tényleges magassága kicsi marad */
+  --navH:   56px;   /* gombsor magassága */
+  --logoH:  140px;  /* a logó VALÓDI magassága (lehet nagyobb, mint a fejléc) */
+}
+
+.brand-header{
+  height: var(--brandH) !important;
+  overflow: visible;                 /* engedjük, hogy a nagy logó kilógjon */
+}
+.brand-header .logo{
+  height: var(--logoH) !important;   /* tényleges logóméret (növeld, ha kell) */
+  width: auto;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
+  /* középre igazítjuk úgy, hogy a nagyobb logó ne tolja le a layert */
+  margin-top: calc((var(--brandH) - var(--logoH)) / 2) !important; /* ez negatív lesz, ettől „belelóg” felfelé/lefelé */
+}
+
+/* a fő tartalom felső paddingje marad a kicsi fejléchez igazítva */
+main{
+  padding-top: calc(var(--brandH) + var(--navH) + 14px) !important;
+}
+
+/* sötét mód – csak színek, a méretezés változatlan */
+@media (prefers-color-scheme: dark){
+  .brand-header{ background:#1c1c1c !important; }
+  .topbar nav{ background:#111 !important; }
+}
+
+/* mobilon legyen arányosabb */
+@media (max-width:600px){
+  :root{
+    --brandH: 72px;
+    --navH:   52px;
+    --logoH:  120px;  /* ha túl nagy, vedd lejjebb */
+  }
+}
 
   </style>
 </head>
