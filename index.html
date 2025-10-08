@@ -6,140 +6,172 @@
   <title>Bevásárlólista + Heti étrend + Receptek (képekkel)</title>
   <meta name="description" content="Bevásárlólista, heti étrend és receptek. Az étrend táblázatban az ételek linkjei a külön receptoldalakra mutatnak. Receptenként fotó." />
   <style>
-    /* ======= MODERN ALAPDIZÁJN ======= */
-:root {
-  --brand: #2a775a;
-  --brand-light: #e9f6f0;
-  --surface: #ffffff;
-  --bg: #f2f4f7;
-  --text: #1a1a1a;
-  --radius: 14px;
-  --shadow: 0 4px 20px rgba(0,0,0,0.05);
+    :root { --gap:12px; --pad:12px; --radius:12px; --brand:#2a775a; }
+    * { box-sizing:border-box; }
+    html, body { height:100%; }
+    body { margin:0; background:#f6f7f9; color:#111; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; }
+    header { position:sticky; top:0; z-index:10; background:var(--brand); color:#fff; padding:10px 14px; display:flex; align-items:center; gap:10px; }
+    header h1 { font-size:1.1rem; margin:0; flex:1; }
+    nav { display:flex; gap:8px; padding:10px; background:#f6f7f9; position:sticky; top:48px; z-index:9; }
+    nav button { flex:1; padding:10px; border-radius:10px; border:1px solid #ddd; background:#fff; cursor:pointer; }
+    nav button.active { background:#e8f5ee; border-color:var(--brand); color:var(--brand); }
+    main { padding:8px 12px 60px; }
+    .card { background:#fff; border-radius:var(--radius); padding:var(--pad); box-shadow:0 1px 6px rgba(0,0,0,.06); margin-bottom:var(--gap); }
+
+    .item { display:flex; align-items:center; gap:10px; padding:10px 8px; border-bottom:1px solid #eee; }
+    .item:last-child { border-bottom:none; }
+    input[type="checkbox"] { width:22px; height:22px; accent-color:var(--brand); }
+    label { font-size:1.05rem; line-height:1.35; flex:1; }
+
+    .controls { display:flex; gap:8px; margin:8px 0 12px; }
+    button { font-size:.95rem; padding:10px 12px; border-radius:10px; border:1px solid #ccc; background:#fff; cursor:pointer; }
+    button.primary { background:var(--brand); color:#fff; border-color:var(--brand); }
+
+    table { width:100%; border-collapse:collapse; min-width:640px; }
+    th, td { text-align:left; padding:8px; border-bottom:1px solid #eee; vertical-align:top; }
+    thead th { position:sticky; top:0; background:#f1f1f1; z-index:1; }
+    .plan a { color:#0b5; text-decoration:none; border-bottom:1px dashed #0b5; }
+    .plan a:hover { text-decoration:underline; }
+
+    .hidden { display:none; }
+    footer { position:sticky; bottom:0; padding:8px; background:#f6f7f9; font-size:.9rem; color:#444; }
+    .small { color:#444; font-size:.92rem; }
+    .notice { padding:.6rem .8rem; border:1px dashed #ccc; border-radius:8px; background:#fafafa; margin-bottom:.5rem; }
+    .recipe-meta { display:flex; gap:10px; flex-wrap:wrap; margin:8px 0 12px; color:#333; }
+    .recipe-meta span { background:#f6f7f9; border:1px solid #e5e5e5; border-radius:999px; padding:.25rem .55rem; }
+    .recipes article { scroll-margin-top:120px; }
+    .recipe-img { width:100%; max-width:560px; display:block; border-radius:10px; border:1px solid #e5e5e5; margin:6px 0 12px; object-fit:cover; }
+
+    /* === Középre igazított elrendezés az egész oldalra === */
+    main { display: flex; justify-content: center; }
+    main > section { width: 100%; max-width: 900px; }
+    .card { margin-left: auto; margin-right: auto; }
+    #view-lista .card h2, #view-etrend .card h2, #view-receptek .card h2 { text-align: center; }
+    .plan table { margin: 0 auto; } /* étrend táblázat középre */
+
+    /* === Receptek: minden elem ugyanabba a hasábba (kép szélessége) === */
+    .recipes .card > .recipe-img,
+    .recipes .card > .recipe-meta,
+    .recipes .card > p,
+    .recipes .card > ul,
+    .recipes .card > ol {
+      max-width: 560px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* Szöveg igazítása a hasábon belül */
+    .recipes .card p,
+    .recipes .card ul,
+    .recipes .card ol { text-align: left; line-height: 1.55; }
+
+    /* Mobil finomhangolás */
+    @media (max-width: 600px) {
+      body { font-size: 16px; }
+      nav { flex-direction: column; }
+      nav button { width: 100%; font-size: 1rem; padding: 12px; }
+      .card { padding: 14px; }
+      .recipe-img { max-width: 100%; height: auto; }
+      ul { padding-left: 20px; margin-top: 4px; margin-bottom: 8px; }
+    }
+      /* Hover kiemelés a Receptek rács kártyáin (PC) */
+#view-receptek .card a {
+  display: block;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  will-change: transform;
+  cursor: pointer;
+}
+#view-receptek .card a:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+/* billentyűzet fókuszhoz is kapjon jelzést */
+#view-receptek .card a:focus-visible {
+  outline: 2px solid #2a775a;
+  outline-offset: 2px;
+}
+/* ==== Heti étrend – vizuális tuning ==== */
+#view-etrend .plan { overflow: hidden; }
+#view-etrend .plan table {
+  border-collapse: separate;
+  border-spacing: 0;
+  width: 100%;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  font-size: 0.98rem;
 }
 
-html, body {
-  margin: 0;
-  padding: 0;
-  background: var(--bg);
-  color: var(--text);
-  font-family: "Inter", "Segoe UI", Roboto, sans-serif;
-  line-height: 1.55;
-  letter-spacing: 0.01em;
-}
-
-/* Fejléc */
-header {
-  background: var(--brand);
-  color: #fff;
-  padding: 18px 20px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-}
-header h1 {
-  font-size: 1.3rem;
-  font-weight: 600;
-  margin: 0;
-}
-
-/* Navigáció */
-nav {
-  display: flex;
-  gap: 10px;
-  padding: 10px 16px;
-  background: var(--surface);
-  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+/* Fejléc: ragad + finom árnyék */
+#view-etrend thead th {
   position: sticky;
   top: 0;
-  z-index: 10;
-}
-nav button {
-  flex: 1;
-  border: none;
-  border-radius: 10px;
-  padding: 10px 14px;
-  background: #f4f6f5;
-  color: #333;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-nav button:hover {
-  background: var(--brand-light);
-  color: var(--brand);
-}
-nav button.active {
-  background: var(--brand);
-  color: #fff;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+  background: linear-gradient(#f9fafb, #f1f5f4);
+  z-index: 2;
+  font-weight: 700;
+  letter-spacing: .01em;
+  border-bottom: 1px solid #e6e6e6;
+  padding: 12px 14px;
+  white-space: nowrap;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.04);
 }
 
-/* Tartalom */
-main {
-  padding: 20px;
-  max-width: 960px;
-  margin: 0 auto;
+/* Cellák */
+#view-etrend td {
+  padding: 12px 14px;
+  border-bottom: 1px solid #f0f0f0;
+  vertical-align: top;
 }
 
-/* Kártyák */
-.card {
-  background: var(--surface);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  padding: 16px;
-  margin-bottom: 16px;
-  transition: transform .15s ease, box-shadow .15s ease;
+/* Zebra + hover sor kiemelés */
+#view-etrend tbody tr:nth-child(even) td { background: #fbfbfc; }
+#view-etrend tbody tr:hover td { background: #f5fbf8; }
+
+/* 1. oszlop (Nap) – ragadjon balra és legyen hangsúlyos */
+#view-etrend tbody td:first-child,
+#view-etrend thead th:first-child {
+  position: sticky;
+  left: 0;
+  z-index: 3; /* a többi felé kerüljön */
+  background: #ffffff;
+  border-right: 1px solid #eef2ef;
+  font-weight: 700;
+  color: #2a775a;
+  white-space: nowrap;
 }
-.card:hover {
+
+/* Linkek: „badge” stílus */
+#view-etrend .plan a {
+  display: inline-block;
+  background: #eef8f3;
+  border: 1px solid #d5ede2;
+  color: #1d6b50;
+  padding: 6px 10px;
+  border-radius: 999px;
+  line-height: 1.2;
+  text-decoration: none;
+  transition: transform .15s ease, box-shadow .2s ease, background .2s ease, border-color .2s ease;
+}
+#view-etrend .plan a:hover {
+  background: #e6f4ee;
+  border-color: #c2e6d7;
   transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  box-shadow: 0 4px 12px rgba(0,0,0,.08);
 }
 
-/* Gombok */
-button {
-  font-size: 1rem;
-  padding: 10px 14px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  background: #fff;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-button:hover {
-  background: #f4f4f4;
-}
-button.primary {
-  background: var(--brand);
-  border-color: var(--brand);
-  color: #fff;
-}
-button.primary:hover {
-  background: #25684f;
+/* Görgethető konténer: finom szélső árnyékok, ha kilóg */
+#view-etrend .card > div[style*="overflow-x:auto"] {
+  position: relative;
+  mask-image: linear-gradient(to right, transparent 0, black 12px, black calc(100% - 12px), transparent 100%);
 }
 
-/* Lábléc */
-footer {
-  text-align: center;
-  color: #555;
-  padding: 12px;
-  font-size: 0.9rem;
-  background: #fafafa;
-  border-top: 1px solid #eee;
-  margin-top: 20px;
+/* Mobil finomhangolás */
+@media (max-width: 600px) {
+  #view-etrend thead th { padding: 10px 12px; font-size: 0.95rem; }
+  #view-etrend td { padding: 10px 12px; font-size: 0.95rem; }
+  #view-etrend .plan a { padding: 6px 9px; }
 }
 
-/* Checkbox lista szebb */
-.item {
-  border-bottom: 1px solid #eee;
-  padding: 10px 8px;
-}
-input[type="checkbox"] {
-  width: 22px;
-  height: 22px;
-  accent-color: var(--brand);
-}
-label {
-  font-size: 1.05rem;
-  flex: 1;
-}
   </style>
 </head>
 <body>
