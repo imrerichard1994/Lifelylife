@@ -171,6 +171,92 @@
   #view-etrend td { padding: 10px 12px; font-size: 0.95rem; }
   #view-etrend .plan a { padding: 6px 9px; }
 }
+/* === Finom modernizálás, stabil verzió === */
+
+/* Háttér és alapszínek */
+body {
+  background: #f4f5f7;
+  color: #222;
+}
+
+/* Kártyák */
+.card {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+}
+
+/* Navigációs gombok */
+nav button {
+  border-radius: 10px;
+  border: 1px solid #dcdcdc;
+  background: #fff;
+  color: #333;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+nav button:hover {
+  background: #e9f6f0;
+  color: #2a775a;
+}
+nav button.active {
+  background: #2a775a;
+  color: #fff;
+  border-color: #2a775a;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.12);
+}
+
+/* Táblázat */
+table {
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+}
+thead th {
+  background: #f7f9f8;
+  font-weight: 600;
+  border-bottom: 2px solid #eaeaea;
+}
+tbody tr:nth-child(even) {
+  background: #fafafa;
+}
+tbody tr:hover td {
+  background: #f3f9f6;
+}
+
+/* Gombok */
+button {
+  border-radius: 8px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+button:hover {
+  background: #e8f5ee;
+  color: #1a563d;
+}
+button.primary {
+  background: #2a775a;
+  color: #fff;
+  border-color: #2a775a;
+}
+button.primary:hover {
+  background: #256b4f;
+}
+
+/* Checkbox */
+input[type="checkbox"] {
+  accent-color: #2a775a;
+}
+
+/* Fejléc */
+header {
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
 
   </style>
 </head>
