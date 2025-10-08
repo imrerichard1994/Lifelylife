@@ -302,6 +302,35 @@
     color: #ccc !important;
   }
 }
+/* === Recept kártyák – DARK MODE, inline fehér háttér felülírása === */
+@media (prefers-color-scheme: dark){
+
+  /* A kártyákat alkotó <a> elemek (nálad ezek a "dobozok") */
+  #view-receptek .card > div a{
+    background: rgba(30,30,30,0.92) !important;   /* felülírja a style="background:#fff"-et */
+    border-color: rgba(255,255,255,0.08) !important;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.6) !important;
+    transition: transform .25s ease, box-shadow .25s ease !important;
+  }
+  #view-receptek .card > div a:hover{
+    transform: translateY(-4px) scale(1.01) !important;
+    box-shadow: 0 8px 22px rgba(0,0,0,0.75) !important;
+  }
+
+  /* A képalatti cím-doboz (a <div> az <a> belsejében) */
+  #view-receptek .card > div a > div{
+    background: transparent !important;  /* ne legyen fehér csík */
+    color: #eaeaea !important;
+  }
+
+  /* A kártyákat tartalmazó szülő kártya */
+  #view-receptek .card{
+    background: rgba(25,25,25,0.9) !important;
+    color: #f2f2f2 !important;
+    border-radius: 14px !important;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.7) !important;
+  }
+}
 
   </style>
 </head>
