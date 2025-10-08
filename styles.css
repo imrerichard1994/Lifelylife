@@ -62,3 +62,70 @@ footer { margin-top: 3rem; font-size: .9rem; color: #666; }
   .brand-header{ background:#1c1c1c; }
   .topbar nav{ background:#111; }
 }
+/* ===== TOPBAR FIX – végig fent marad + nagyobb logó ===== */
+:root{
+  --brandH: 120px;   /* fejléc (logós sáv) magasság */
+  --navH:   56px;    /* gombsor magasság */
+}
+
+/* A teljes felső blokk legyen FIXEN fent */
+.topbar{
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1200;
+}
+
+/* Fejléc: csak logó, KÖZÉPEN + nagyobbra véve */
+.brand-header{
+  display:flex; align-items:center; justify-content:center;
+  height: var(--brandH);
+  background: var(--brand);
+  color:#fff;
+  box-shadow: 0 2px 10px rgba(0,0,0,.12);
+  padding: 0 12px;
+}
+.brand-header .logo{
+  height: calc(var(--brandH) * 0.8); /* ~96px most; ha kell még nagyobb, emeld 0.9-re */
+  width: auto; object-fit: contain; display:block; margin:0 auto;
+}
+
+/* A nav már a topbar része, nem sticky külön */
+.topbar nav{
+  position: static !important;
+  display:flex; gap:8px; padding:10px;
+  background:#f6f7f9;
+  box-shadow: 0 2px 10px rgba(0,0,0,.06);
+}
+
+/* A fő tartalom kapjon felső belső margót, hogy ne takarja a fix topbar */
+main{
+  padding-top: calc(var(--brandH) + var(--navH) + 14px) !important;
+}
+
+/* ==== A lista fölötti gombsor mindig maradjon látható (sticky) ==== */
+#view-lista .controls{
+  position: sticky;
+  top: calc(var(--brandH) + var(--navH) + 8px);
+  z-index: 1000;
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(4px);
+  padding: 8px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0,0,0,.06);
+}
+
+/* DARK MODE finomhangolás a top sávhoz és a sticky controls-hoz */
+@media (prefers-color-scheme: dark){
+  .brand-header{ background:#1c1c1c; }
+  .topbar nav{ background:#111; box-shadow: 0 2px 10px rgba(0,0,0,.5); }
+  #view-lista .controls{
+    background: rgba(20,20,20,0.92);
+    box-shadow: 0 2px 12px rgba(0,0,0,.6);
+  }
+}
+
+/* kicsi kijelzőn arányosítsuk a logót, hogy elférjen */
+@media (max-width: 600px){
+  :root{ --brandH: 96px; --navH: 52px; }
+  .brand-header .logo{ height: calc(var(--brandH) * 0.8); }
+}
