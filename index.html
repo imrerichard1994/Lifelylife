@@ -90,7 +90,87 @@
   outline: 2px solid #2a775a;
   outline-offset: 2px;
 }
+/* ==== Heti étrend – vizuális tuning ==== */
+#view-etrend .plan { overflow: hidden; }
+#view-etrend .plan table {
+  border-collapse: separate;
+  border-spacing: 0;
+  width: 100%;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  font-size: 0.98rem;
+}
 
+/* Fejléc: ragad + finom árnyék */
+#view-etrend thead th {
+  position: sticky;
+  top: 0;
+  background: linear-gradient(#f9fafb, #f1f5f4);
+  z-index: 2;
+  font-weight: 700;
+  letter-spacing: .01em;
+  border-bottom: 1px solid #e6e6e6;
+  padding: 12px 14px;
+  white-space: nowrap;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.04);
+}
+
+/* Cellák */
+#view-etrend td {
+  padding: 12px 14px;
+  border-bottom: 1px solid #f0f0f0;
+  vertical-align: top;
+}
+
+/* Zebra + hover sor kiemelés */
+#view-etrend tbody tr:nth-child(even) td { background: #fbfbfc; }
+#view-etrend tbody tr:hover td { background: #f5fbf8; }
+
+/* 1. oszlop (Nap) – ragadjon balra és legyen hangsúlyos */
+#view-etrend tbody td:first-child,
+#view-etrend thead th:first-child {
+  position: sticky;
+  left: 0;
+  z-index: 3; /* a többi felé kerüljön */
+  background: #ffffff;
+  border-right: 1px solid #eef2ef;
+  font-weight: 700;
+  color: #2a775a;
+  white-space: nowrap;
+}
+
+/* Linkek: „badge” stílus */
+#view-etrend .plan a {
+  display: inline-block;
+  background: #eef8f3;
+  border: 1px solid #d5ede2;
+  color: #1d6b50;
+  padding: 6px 10px;
+  border-radius: 999px;
+  line-height: 1.2;
+  text-decoration: none;
+  transition: transform .15s ease, box-shadow .2s ease, background .2s ease, border-color .2s ease;
+}
+#view-etrend .plan a:hover {
+  background: #e6f4ee;
+  border-color: #c2e6d7;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,.08);
+}
+
+/* Görgethető konténer: finom szélső árnyékok, ha kilóg */
+#view-etrend .card > div[style*="overflow-x:auto"] {
+  position: relative;
+  mask-image: linear-gradient(to right, transparent 0, black 12px, black calc(100% - 12px), transparent 100%);
+}
+
+/* Mobil finomhangolás */
+@media (max-width: 600px) {
+  #view-etrend thead th { padding: 10px 12px; font-size: 0.95rem; }
+  #view-etrend td { padding: 10px 12px; font-size: 0.95rem; }
+  #view-etrend .plan a { padding: 6px 9px; }
+}
 
   </style>
 </head>
