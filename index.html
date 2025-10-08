@@ -197,6 +197,17 @@
     content: url("images/lifelylife-logo-splash.png");
   }
 }
+/* Splash háttér dark mode-ban legyen sötét */
+@media (prefers-color-scheme: dark) {
+  #splash {
+    /* egyszínű sötét háttér */
+    background: rgba(0,0,0,0.92) !important;
+    /* ha szeretnél finom vignettát:
+    background:
+      radial-gradient(70% 70% at 50% 40%, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.92) 70%, rgba(0,0,0,0.95) 100%) !important;
+    */
+  }
+}
 
   </style>
 </head>
