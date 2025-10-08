@@ -34,6 +34,85 @@ body {
   margin: 20px auto;
   max-width: 800px;
 }
+/* ==== AUTOMATIKUS NIGHT MODE (prefers-color-scheme: dark) ==== */
+@media (prefers-color-scheme: dark) {
+
+  body {
+    background:
+      linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.8)),
+      url("images/asztal_hatter.png") no-repeat center center fixed;
+    background-size: cover;
+    color: #eee;
+  }
+
+  .card {
+    background: rgba(20, 20, 20, 0.9);
+    color: #f0f0f0;
+    box-shadow: 0 2px 10px rgba(0,0,0,.6);
+    border: 1px solid rgba(255,255,255,0.05);
+  }
+
+  header {
+    background: #1c1c1c;
+    color: #fff;
+    box-shadow: 0 2px 10px rgba(0,0,0,.5);
+  }
+
+  nav {
+    background: #111;
+  }
+
+  nav button {
+    background: #1e1e1e;
+    color: #ddd;
+    border-color: #333;
+  }
+
+  nav button.active {
+    background: #2a775a;
+    color: #fff;
+    border-color: #2a775a;
+  }
+
+  .plan a {
+    background: #1a3a2e;
+    border-color: #1a3a2e;
+    color: #9ff0b6;
+  }
+
+  .plan a:hover {
+    background: #245a44;
+    border-color: #2a775a;
+    color: #c6f8d5;
+  }
+
+  table {
+    background: rgba(20,20,20,0.9);
+    color: #eee;
+  }
+
+  th, td {
+    border-bottom: 1px solid #333;
+  }
+
+  thead th {
+    background: #222;
+    color: #fff;
+  }
+
+  #view-etrend tbody tr:hover td {
+    background: rgba(42,119,90,0.15);
+  }
+
+  /* Logó sötét verzió (ha van külön night logo) */
+  header img.logo {
+    content: url("images/lifelylife-logo-dark.png");
+  }
+
+  #splash img {
+    content: url("images/lifelylife-logo-dark.png");
+  }
+}
 
   </style>
 </head>
