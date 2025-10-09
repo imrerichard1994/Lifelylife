@@ -596,6 +596,37 @@ main{
     color: #2a775a;
   }
 }
+/* === LIGHT MODE FIX: fehér fejléc + logó kényszerített megjelenítése === */
+@media (prefers-color-scheme: light) {
+  /* csak a tényleges sávokat fehérítjük */
+  .brand-header { background: #fff !important; }
+  .topbar      { background: transparent !important; }
+  .topbar nav  { background: #fff !important; box-shadow: 0 1px 6px rgba(0,0,0,0.08); }
+
+  /* gombok */
+  nav button { background: #f7f7f7 !important; border-color: #ddd !important; color:#222 !important; }
+  nav button.active { background:#e8f5ee !important; border-color:#2a775a !important; color:#2a775a !important; }
+
+  /* LOGÓ – mindig a saját src jelenjen meg, ne írja felül semmi */
+  header img.logo{
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, calc(-50% + (var(--logoH) - var(--brandH)) / 2)) !important;
+    height: var(--logoH) !important;
+    width: auto !important;
+    object-fit: contain !important;
+    display: block !important;
+    z-index: 2 !important;
+    pointer-events: none !important;
+    content: none !important;     /* ha korábban volt content:url(...) */
+    opacity: 1 !important;        /* biztos ami biztos */
+  }
+
+  /* a fejléc legyen pozícionálható szülő */
+  .brand-header{ position: relative !important; overflow: visible !important; }
+  .topbar{ overflow: visible !important; }
+}
 
   </style>
 </head>
