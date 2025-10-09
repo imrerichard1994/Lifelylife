@@ -550,6 +550,32 @@ main{
     --logoH: 140px;
   }
 }
+/* === LOGÓ KÖZÉPRE, DE NE LÓGJON KI FELFELÉ === */
+:root{
+  /* nyugodtan növeld tovább a logót: 200–220px is lehet */
+  --logoH: 200px;
+}
+
+.topbar{ overflow: visible; } /* engedjük, hogy a logó kilóghasson lefelé */
+
+.brand-header{
+  position: relative;
+  overflow: visible !important;
+}
+
+/* A trükk: a középre igazított logót fél különbséggel LEFELÉ toljuk,
+   így a teteje nem megy 0 fölé, még ha nagyobb is a fejlécnél. */
+.brand-header .logo{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  height: var(--logoH);
+  width: auto;
+  transform: translate(-50%, calc(-50% + (var(--logoH) - var(--brandH)) / 2));
+  object-fit: contain;
+  pointer-events: none;
+  max-height: 28vh; /* védelem: kisebb képernyőn se lógjon ki */
+}
 
   </style>
 </head>
