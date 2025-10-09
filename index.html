@@ -576,6 +576,26 @@ main{
   pointer-events: none;
   max-height: 28vh; /* védelem: kisebb képernyőn se lógjon ki */
 }
+/* === Világos mód – fehér fejléc és gombszínek === */
+@media (prefers-color-scheme: light) {
+  header, .topbar, nav {
+    background: #ffffff !important;
+    color: #111 !important;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.1);
+  }
+
+  nav button {
+    background: #f8f8f8;
+    border-color: #ddd;
+    color: #222;
+  }
+
+  nav button.active {
+    background: #e8f5ee;
+    border-color: #2a775a;
+    color: #2a775a;
+  }
+}
 
   </style>
 </head>
