@@ -1,4 +1,3 @@
-/*most*/
 <!doctype html>
 <html lang="hu">
 <head>
@@ -628,6 +627,21 @@ main{
   .brand-header{ position: relative !important; overflow: visible !important; }
   .topbar{ overflow: visible !important; }
 }
+/* LOGÓ MEGJELENÍTÉS FIX - Splash verzió */
+header img.logo {
+  content: normal !important;
+  display: block !important;
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, calc(-50% + (var(--logoH) - var(--brandH)) / 2)) !important;
+  height: var(--logoH, 240px) !important;
+  width: auto !important;
+  z-index: 3 !important;
+  pointer-events: none !important;
+  object-fit: contain !important;
+  opacity: 1 !important;
+}
 
   </style>
 </head>
@@ -641,8 +655,8 @@ main{
   <!-- TOP SÁV: logó + gombok együtt ragadnak felül -->
 <div class="topbar">
   <header class="brand-header">
-    <img class="logo" src="images/images/lifelylife-logo-splash.png" alt="LifelyLife">
-  </header>
+  <img class="logo" src="images/lifelylife-logo-splash.png?v=1" alt="LifelyLife">
+</header>
 
   <nav>
     <button class="active" id="tab-lista" type="button" aria-controls="view-lista" aria-selected="true">Bevásárlólista</button>
