@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="hu">
 <head>
@@ -9,10 +8,13 @@
   <link rel="stylesheet" href="styles.css?v=3">
 </head>
 <body>
+
+  <!-- SPLASH (csak első megnyitáskor) -->
   <div id="splash" aria-hidden="true">
     <img src="images/lifelylife-logo-splash.png" alt="LifelyLife">
   </div>
 
+  <!-- TOPBAR: logó + navigáció -->
   <div class="topbar">
     <header class="brand-header">
       <img class="logo" src="images/lifelylife-logo-splash.png" alt="LifelyLife">
@@ -25,6 +27,7 @@
   </div>
 
   <main>
+    <!-- LISTA -->
     <section id="view-lista" role="region" aria-labelledby="tab-lista">
       <div class="controls">
         <button class="primary" id="checkAll" type="button">Összes kipipálása</button>
@@ -88,34 +91,100 @@
       </section>
     </section>
 
+    <!-- ÉTREND (kattintható linkek a receptekhez) -->
     <section id="view-etrend" class="hidden" role="region" aria-labelledby="tab-etrend">
       <div class="card plan">
         <h2>Heti étrend – kattints egy ételre a recepthez</h2>
         <div style="overflow-x:auto;">
           <table>
-            <thead><tr><th>Nap</th><th>Reggeli</th><th>Ebéd</th><th>Uzsonna</th><th>Vacsora</th></tr></thead>
+            <thead>
+              <tr><th>Nap</th><th>Reggeli</th><th>Ebéd</th><th>Uzsonna</th><th>Vacsora</th></tr>
+            </thead>
             <tbody>
-              <tr><td>Hétfő</td><td><a href="recept-zabkasa.html?from=etrend">Zabkása mandulaitallal, lenmaggal, banánnal</a></td><td><a href="recept-grillezett-csirkemell.html?from=etrend">Grillezett csirkemell, barna rizs, olívaolajos saláta</a></td><td>Dió + alma</td><td>Párolt zöldségek + főtt tojás</td></tr>
-              <tr><td>Kedd</td><td>Avokádós teljes kiőrlésű kenyér paradicsommal</td><td><a href="recept-lazac.html?from=etrend">Lazac (vagy tonhal) édesburgonyával</a></td><td>Kefir vagy növényi joghurt chia maggal</td><td>Zöldséges rizottó olívaolajjal</td></tr>
-              <tr><td>Szerda</td><td>Zabpalacsinta mogyoróvajjal</td><td>Pulykamell kuszkusszal, uborkasalátával</td><td>Tökmag</td><td>Lencsefőzelék + főtt tojás</td></tr>
-              <tr><td>Csütörtök</td><td>Gyümölcsturmix (banán, bogyósok, zabital)</td><td>Csirkemell, quinoa, zöldbab</td><td>Narancs + mandula</td><td>Zöldségleves + teljes kiőrlésű pirítós</td></tr>
-              <tr><td>Péntek</td><td>Zabkeksz + kamillatea</td><td><a href="recept-tonhalsalata.html?from=etrend">Tonhalsaláta</a></td><td>Dió vagy kesudió</td><td>Párolt zöldségek + rántotta</td></tr>
-              <tr><td>Szombat</td><td>Teljes kiőrlésű pirítós humusszal</td><td>Sült csirkecomb, bulgur, saláta</td><td>Alma + mandula</td><td>Zöldséges tészta (teljes kiőrlésű)</td></tr>
-              <tr><td>Vasárnap</td><td>Tojásrántotta zöldségekkel</td><td>Lazacos / tonhalas rizs salátával</td><td>Joghurttal kevert zab</td><td>Sült zöldség, kevés rizs</td></tr>
+              <tr>
+                <td>Hétfő</td>
+                <td><a href="/recept-zabkasa.html?from=etrend">Zabkása mandulaitallal, lenmaggal, banánnal</a></td>
+                <td><a href="/recept-grillezett-csirkemell.html?from=etrend">Grillezett csirkemell, barna rizs, olívaolajos saláta</a></td>
+                <td>Dió + alma</td>
+                <td>Párolt zöldségek + főtt tojás</td>
+              </tr>
+              <tr>
+                <td>Kedd</td>
+                <td>Avokádós teljes kiőrlésű kenyér paradicsommal</td>
+                <td><a href="/recept-lazac.html?from=etrend">Lazac (vagy tonhal) édesburgonyával</a></td>
+                <td>Kefir vagy növényi joghurt chia maggal</td>
+                <td>Zöldséges rizottó olívaolajjal</td>
+              </tr>
+              <tr>
+                <td>Szerda</td>
+                <td>Zabpalacsinta mogyoróvajjal</td>
+                <td>Pulykamell kuszkusszal, uborkasalátával</td>
+                <td>Tökmag</td>
+                <td>Lencsefőzelék + főtt tojás</td>
+              </tr>
+              <tr>
+                <td>Csütörtök</td>
+                <td>Gyümölcsturmix (banán, bogyósok, zabital)</td>
+                <td>Csirkemell, quinoa, zöldbab</td>
+                <td>Narancs + mandula</td>
+                <td>Zöldségleves + teljes kiőrlésű pirítós</td>
+              </tr>
+              <tr>
+                <td>Péntek</td>
+                <td>Zabkeksz + kamillatea</td>
+                <td><a href="/recept-tonhalsalata.html?from=etrend">Tonhalsaláta</a></td>
+                <td>Dió vagy kesudió</td>
+                <td>Párolt zöldségek + rántotta</td>
+              </tr>
+              <tr>
+                <td>Szombat</td>
+                <td>Teljes kiőrlésű pirítós humusszal</td>
+                <td>Sült csirkecomb, bulgur, saláta</td>
+                <td>Alma + mandula</td>
+                <td>Zöldséges tészta (teljes kiőrlésű)</td>
+              </tr>
+              <tr>
+                <td>Vasárnap</td>
+                <td>Tojásrántotta zöldségekkel</td>
+                <td>Lazacos / tonhalas rizs salátával</td>
+                <td>Joghurttal kevert zab</td>
+                <td>Sült zöldség, kevés rizs</td>
+              </tr>
             </tbody>
           </table>
         </div>
       </div>
     </section>
 
+    <!-- RECEPTEK (kártyák külön oldalakra mutatnak) -->
     <section id="view-receptek" class="hidden" role="region" aria-labelledby="tab-receptek">
       <div class="card">
         <h2>Receptek</h2>
         <div class="recipes">
-          <article><a class="recipe-card" href="recept-zabkasa.html?from=receptek"><img src="images/zabkasa.png" alt="Zabkása"><h3>Zabkása mandulaitallal, lenmaggal, banánnal</h3></a></article>
-          <article><a class="recipe-card" href="recept-grillezett-csirkemell.html?from=receptek"><img src="images/grillezett_csirkemell_salata.png" alt="Grillezett csirkemell salátával"><h3>Grillezett csirkemell, barna rizs, olívaolajos saláta</h3></a></article>
-          <article><a class="recipe-card" href="recept-tonhalsalata.html?from=receptek"><img src="images/tonhalsalata.png" alt="Tonhalsaláta"><h3>Tonhalsaláta</h3></a></article>
-          <article><a class="recipe-card" href="recept-lazac.html?from=receptek"><img src="images/lazac_edesburgonyaval.png" alt="Lazac édesburgonyával"><h3>Lazac (vagy tonhal) édesburgonyával</h3></a></article>
+          <article>
+            <a class="recipe-card" href="/recept-zabkasa.html?from=receptek">
+              <img src="images/zabkasa.png" alt="Zabkása">
+              <h3>Zabkása mandulaitallal, lenmaggal, banánnal</h3>
+            </a>
+          </article>
+          <article>
+            <a class="recipe-card" href="/recept-grillezett-csirkemell.html?from=receptek">
+              <img src="images/grillezett_csirkemell_salata.png" alt="Grillezett csirkemell salátával">
+              <h3>Grillezett csirkemell, barna rizs, olívaolajos saláta</h3>
+            </a>
+          </article>
+          <article>
+            <a class="recipe-card" href="/recept-tonhalsalata.html?from=receptek">
+              <img src="images/tonhalsalata.png" alt="Tonhalsaláta">
+              <h3>Tonhalsaláta</h3>
+            </a>
+          </article>
+          <article>
+            <a class="recipe-card" href="/recept-lazac.html?from=receptek">
+              <img src="images/lazac_edesburgonyaval.png" alt="Lazac édesburgonyával">
+              <h3>Lazac (vagy tonhal) édesburgonyával</h3>
+            </a>
+          </article>
         </div>
       </div>
     </section>
@@ -123,6 +192,7 @@
 
   <script>
   (function(){
+    // Tabs
     var tabLista = document.getElementById('tab-lista');
     var tabEtrend = document.getElementById('tab-etrend');
     var tabReceptek = document.getElementById('tab-receptek');
@@ -142,6 +212,7 @@
     tabEtrend.addEventListener('click', function(){ show('etrend'); });
     tabReceptek.addEventListener('click', function(){ show('receptek'); });
 
+    // Bevásárlólista mentés
     var STORAGE_KEY = 'lifelylife_lista_v2';
     function loadState(){
       try{
@@ -186,9 +257,11 @@
       }
     }
 
+    // Hash alapú nyitó tab
     if(location.hash==='#view-etrend') show('etrend');
     if(location.hash==='#view-receptek') show('receptek');
 
+    // Init
     loadState();
   })();
   </script>
