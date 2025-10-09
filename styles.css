@@ -1,0 +1,75 @@
+
+/* LifelyLife – letisztított stílus (final) */
+:root{ --gap:12px; --pad:12px; --radius:12px; --brand:#2a775a; --brandH:90px; --navH:56px; --logoH:200px; }
+*{ box-sizing:border-box; }
+html, body{ height:100%; }
+body{
+  margin:0; color:#111;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  background: linear-gradient(rgba(255,255,255,.8), rgba(255,255,255,.85)), url("images/asztal_hatter.png") center/cover fixed no-repeat;
+}
+.topbar{ position:fixed; top:0; left:0; right:0; z-index:1200; overflow:visible; }
+.brand-header{ position:relative; height:var(--brandH); background:#fff; color:#111; display:flex; align-items:center; justify-content:center; box-shadow:0 2px 10px rgba(0,0,0,.08); }
+.brand-header .logo{ position:absolute; top:50%; left:50%; transform:translate(-50%, calc(-50% + (var(--logoH) - var(--brandH)) / 2)); height:var(--logoH); width:auto; object-fit:contain; pointer-events:none; z-index:3; }
+.topbar nav{ display:flex; gap:8px; padding:10px; background:#fff; box-shadow:0 2px 10px rgba(0,0,0,.06); }
+nav button{ flex:1; padding:10px 12px; border-radius:10px; border:1px solid #ddd; background:#f7f7f7; cursor:pointer; font-size:.95rem; transition:all .2s ease; }
+nav button:hover{ background:#e9f6f0; color:#2a775a; }
+nav button.active{ background:#2a775a; color:#fff; border-color:#2a775a; box-shadow:0 3px 8px rgba(0,0,0,.12); }
+
+main{ padding:8px 12px 60px; padding-top: calc(var(--brandH) + var(--navH) + 14px); display:flex; justify-content:center; }
+main > section{ width:100%; max-width:1000px; }
+.card{ background:rgba(255,255,255,.92); backdrop-filter:blur(4px); border-radius:var(--radius); padding:var(--pad); box-shadow:0 1px 6px rgba(0,0,0,.06); margin-bottom:var(--gap); }
+.hidden{ display:none; }
+.small{ color:#444; font-size:.92rem; }
+
+.item{ display:flex; align-items:center; gap:10px; padding:10px 8px; border-bottom:1px solid #eee; }
+.item:last-child{ border-bottom:none; }
+input[type="checkbox"]{ width:22px; height:22px; accent-color:var(--brand); }
+label{ font-size:1.05rem; line-height:1.35; flex:1; }
+
+.controls{ display:flex; gap:8px; margin:8px 0 12px; position:sticky; top: calc(var(--brandH) + var(--navH) + 8px); z-index:1000; background:rgba(255,255,255,.92); backdrop-filter: blur(4px); padding:8px; border-radius:10px; box-shadow:0 2px 10px rgba(0,0,0,.06); }
+button{ font-size:.95rem; padding:10px 12px; border-radius:8px; border:1px solid #ccc; background:#fff; cursor:pointer; transition:all .2s ease; }
+button:hover{ background:#e8f5ee; color:#1a563d; }
+button.primary{ background:var(--brand); color:#fff; border-color:var(--brand); }
+
+table{ width:100%; border-collapse:separate; border-spacing:0; min-width:640px; background:transparent; border-radius:10px; overflow:hidden; }
+th, td{ text-align:left; padding:12px 14px; border-bottom:1px solid #eee; vertical-align:top; }
+thead th{ position:sticky; top:0; background:linear-gradient(#f9fafb,#f1f5f4); z-index:1; font-weight:700; letter-spacing:.01em; }
+tbody tr:nth-child(even) td{ background:rgba(255,255,255,.40); }
+tbody tr:hover td{ background:rgba(230,244,238,.6); }
+#view-etrend tbody td:first-child, #view-etrend thead th:first-child{ position:sticky; left:0; z-index:3; background:#fff; border-right:1px solid #eef2ef; font-weight:700; color:#2a775a; white-space:nowrap; }
+.plan a{ display:inline-block; background:#eef8f3; border:1px solid #d5ede2; color:#1d6b50; padding:6px 10px; border-radius:999px; line-height:1.2; text-decoration:none; transition:transform .15s ease, box-shadow .2s ease, background .2s ease, border-color .2s ease; }
+.plan a:hover{ background:#e6f4ee; border-color:#c2e6d7; transform:translateY(-2px); box-shadow:0 4px 12px rgba(0,0,0,.08); }
+
+.recipes{ display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:16px; }
+.recipe-card{ display:block; border:1px solid #eee; border-radius:12px; background:#fff; overflow:hidden; box-shadow:0 2px 10px rgba(0,0,0,.06); transition:transform .25s ease, box-shadow .25s ease; }
+.recipe-card:hover{ transform:translateY(-4px) scale(1.01); box-shadow:0 8px 22px rgba(0,0,0,.15); }
+.recipe-card img{ display:block; width:100%; height:170px; object-fit:cover; }
+.recipe-card h3{ margin:0; padding:10px 12px; font-size:1.05rem; }
+
+#splash{ position:fixed; inset:0; background:rgba(255,255,255,0.94); display:flex; align-items:center; justify-content:center; z-index:2000; opacity:1; transition:opacity .8s ease; }
+#splash img{ width:480px; max-width:80vw; height:auto; filter: drop-shadow(0 0 8px rgba(0,0,0,0.15)); }
+body.loaded #splash{ opacity:0; pointer-events:none; }
+
+@media (prefers-color-scheme: dark){
+  body{ color:#eee; background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.85)), url("images/asztal_hatter.png") center/cover fixed no-repeat; }
+  .brand-header{ background:#1c1c1c; color:#fff; }
+  .topbar nav{ background:#111; box-shadow:0 2px 10px rgba(0,0,0,.5); }
+  nav button{ background:#1e1e1e; color:#ddd; border-color:#333; }
+  nav button.active{ background:#2a775a; color:#fff; border-color:#2a775a; }
+  .card{ background:rgba(20,20,20,0.92); color:#f0f0f0; box-shadow:0 2px 12px rgba(0,0,0,.6); border:1px solid rgba(255,255,255,0.06); }
+  .controls{ background:rgba(20,20,20,0.92); box-shadow:0 2px 12px rgba(0,0,0,.6); }
+  thead th{ background:#2a2a2a; color:#fff; border-bottom:1px solid #444; }
+  tbody td{ background:rgba(0,0,0,.25); color:#eaeaea; border-bottom:1px solid #333; }
+  tbody tr:nth-child(even) td{ background:rgba(255,255,255,.04); }
+  .plan a{ background:rgba(22,90,60,.75) !important; border:1px solid rgba(100,220,170,.25) !important; color:#c8f7d9 !important; }
+  .plan a:hover{ background:rgba(38,140,95,.9) !important; color:#fff !important; }
+  .recipe-card{ background:rgba(30,30,30,0.92) !important; border-color:rgba(255,255,255,0.08) !important; box-shadow:0 4px 14px rgba(0,0,0,0.6) !important; }
+  .recipe-card h3{ color:#c8f7d9; }
+  #splash{ background:rgba(0,0,0,0.92); }
+}
+
+@media (max-width:600px){
+  :root{ --brandH:80px; --navH:52px; --logoH:140px; }
+  .recipe-card img{ height:150px; }
+}
