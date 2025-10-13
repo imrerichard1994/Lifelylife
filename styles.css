@@ -1,26 +1,24 @@
 /* =========================================================
-   LifelyLife — stílus (v8, kompatibilis)
-   - Görgetősáv miatti eltolódás megszűnik
-   - Háttér/fejléc/gombsor kihúzása a viewport teljes szélességére
-   - Sötét mód egységes
-   - Étrend táblában csak a link emelkedik ki
-   - Receptkártyák: kép + zöld cím-pill overlay
+   LifelyLife — stílus (v9)
+   - Jobb oldali fehér csík megszűnik (nincs scrollbar-gutter)
+   - Háttér az html-en is (a „gutter” is festve van)
+   - Top sávok 0..0 insett-tel, 100vw trükk nélkül
    ========================================================= */
 
 /* DESIGN TOKENEK */
 :root{
   --gap:12px; --pad:12px; --radius:12px;
   --brand:#2a775a;
-  --brandH:120px;  /* fejléchez */
+  --brandH:120px;
   --navH:56px;
-  --logoH:120px;   /* logó magasság */
+  --logoH:120px;
   --tableStickyBg:#fff;
   --text:#111;
   --cardBg:rgba(255,255,255,.92);
   --shadow:0 2px 10px rgba(0,0,0,.08);
 }
 
-/* ALAPOK + GÖRGETŐSÁV KEZELÉS */
+/* ALAPOK */
 *{ box-sizing:border-box; }
 html, body{
   height:100%;
@@ -28,29 +26,24 @@ html, body{
   margin:0;
   padding:0;
   overflow-x:hidden;
-  background-attachment:fixed;
-}
-html{ scrollbar-gutter:stable; }       /* stabil szélesség */
-@supports not (scrollbar-gutter:stable){
-  body{ overflow-y:scroll; }           /* fallback régi motorokra */
 }
 
-/* HÁTTÉR (világos mód) */
-body{
-  color:var(--text);
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+/* HÁTTÉR (html + body – hogy a „gutter” is festve legyen) */
+html{
   background:
     linear-gradient(rgba(255,255,255,.85), rgba(255,255,255,.85)),
     url("images/asztal_hatter.png") center/cover fixed no-repeat;
 }
-
-/* FELSŐ SÁV + LOGÓ (kihúzás a viewportig) */
-.topbar,
-.brand-header{
-  width:100vw;
-  margin-left:calc(50% - 50vw);  /* kihúzza a görgetősáv mögé is */
+body{
+  color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  background: transparent; /* a tényleges háttér az html-en van */
+  /* Mindig legyen függőleges scrolltér, hogy ne váltogassa a szélességet */
+  overflow-y: auto; /* nincs scrollbar-gutter; természetes viselkedés */
 }
-.topbar{ position:fixed; inset:0 0 auto 0; z-index:1200; }
+
+/* FELSŐ SÁV + LOGÓ – túllógás nélkül, teljes szélesség */
+.topbar{ position:fixed; left:0; right:0; top:0; z-index:1200; }
 .brand-header{
   position:relative; height:var(--brandH);
   background:#fff;
@@ -114,23 +107,19 @@ button.primary{ background:var(--brand); color:#fff; border-color:var(--brand); 
 /* ÉTREND TÁBLA */
 table{ width:100%; border-collapse:separate; border-spacing:0; min-width:640px; background:transparent; border-radius:10px; overflow:hidden; }
 th, td{ text-align:left; padding:12px 14px; border-bottom:1px solid #eee; vertical-align:top; }
-/* sticky fejléc */
 thead th{
   position:sticky; top:0;
   background:linear-gradient(#f9fafb,#f1f5f4);
   z-index:1; font-weight:700; letter-spacing:.01em;
 }
-/* sticky első oszlop (csak étrend nézetnél) */
 #view-etrend tbody td:first-child,
 #view-etrend thead th:first-child{
   position:sticky; left:0; z-index:3;
   background:var(--tableStickyBg);
   border-right:1px solid #eef2ef; font-weight:700; color:var(--brand); white-space:nowrap;
 }
-/* zebra + NINCS sor-hover fehéredés */
 tbody tr:nth-child(even) td{ background:rgba(255,255,255,.40); }
 #view-etrend tbody tr:hover td{ background:inherit; }
-/* link-pill */
 #view-etrend td a{
   display:inline-block; text-decoration:none; font-weight:600;
   background:rgba(22,90,60,.85); color:#fff;
@@ -177,12 +166,12 @@ body.loaded #splash{ opacity:0; pointer-events:none; }
     --text:#eee;
     --cardBg:rgba(20,20,20,0.92);
   }
-  body{
-    color:var(--text);
+  html{
     background:
       linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)),
       url("images/asztal_hatter.png") center/cover fixed no-repeat;
   }
+  body{ color:var(--text); background: transparent; }
   .brand-header{ background:#1c1c1c; color:#fff; }
   .topbar nav{ background:#111; box-shadow:0 2px 10px rgba(0,0,0,.5); }
   nav button{ background:#1e1e1e; color:#ddd; border-color:#333; }
@@ -192,13 +181,10 @@ body.loaded #splash{ opacity:0; pointer-events:none; }
   thead th{ background:#2a2a2a; color:#fff; border-bottom:1px solid #444; }
   tbody td{ background:rgba(0,0,0,.25); color:#eaeaea; border-bottom:1px solid #333; }
   tbody tr:nth-child(even) td{ background:rgba(255,255,255,.04); }
-  /* tábla link-pill kontraszt sötét módban is */
   #view-etrend td a{ background:rgba(22,90,60,.78); border-color:rgba(100,220,170,.25); }
   #view-etrend td a:hover{ background:rgba(38,140,95,.92); }
-  /* receptkártyák kicsit sötétebb képpel */
   .recipe-card{ background:#111; border-color:rgba(255,255,255,0.06); }
   .recipe-card img{ filter:brightness(0.85); }
-  /* splash sötét háttér */
   #splash{ background:rgba(0,0,0,0.95); }
   #splash img{
     filter: drop-shadow(0 0 10px rgba(0,0,0,0.8))
@@ -206,7 +192,7 @@ body.loaded #splash{ opacity:0; pointer-events:none; }
   }
 }
 
-/* WEBKIT GÖRGETŐ (opcionális, maradhat diszkrét) */
+/* WEBKIT GÖRGETŐ (diszkrét) */
 ::-webkit-scrollbar{ width:12px; }
 ::-webkit-scrollbar-track{ background:rgba(0,0,0,0.05); }
 ::-webkit-scrollbar-thumb{
