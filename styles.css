@@ -151,6 +151,16 @@ body.loaded #splash{ opacity:0; pointer-events:none; }
   /* kártyák: sötét stílus */
   .recipe-card{ background:#111; border-color:rgba(255,255,255,0.06); }
   .recipe-card img{ filter:brightness(0.85); }
+   /* --- Splash sötét mód fix --- */
+@media (prefers-color-scheme: dark) {
+  #splash {
+    background: rgba(0, 0, 0, 0.95);
+  }
+  #splash img {
+    filter: drop-shadow(0 0 10px rgba(0,0,0,0.8))
+            brightness(1.1) contrast(1.05);
+  }
+}
 }
 
 /* MOBIL */
