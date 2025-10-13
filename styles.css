@@ -1,21 +1,23 @@
 /* =========================================================
-   LifelyLife — stílus (v9)
+   LifelyLife — stílus (v10)
    - Jobb oldali fehér csík megszűnik (nincs scrollbar-gutter)
    - Háttér az html-en is (a „gutter” is festve van)
    - Top sávok 0..0 insett-tel, 100vw trükk nélkül
    ========================================================= */
 
 /* DESIGN TOKENEK */
-:root{
-  --gap:12px; --pad:12px; --radius:12px;
-  --brand:#2a775a;
-  --brandH:120px;
-  --navH:56px;
-  --logoH:120px;
-  --tableStickyBg:#fff;
-  --text:#111;
-  --cardBg:rgba(255,255,255,.92);
-  --shadow:0 2px 10px rgba(0,0,0,.08);
+:root {
+  --gap: 12px;
+  --pad: 12px;
+  --radius: 12px;
+  --brand: #2a775a;
+  --brandH: 60px;   /* Fejléc magasság fele */
+  --navH: 56px;
+  --logoH: 60px;    /* Logó pont kitölti a fejlécet */
+  --tableStickyBg: #fff;
+  --text: #111;
+  --cardBg: rgba(255, 255, 255, 0.92);
+  --shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
 }
 
 /* ALAPOK */
@@ -44,16 +46,25 @@ body{
 
 /* FELSŐ SÁV + LOGÓ – túllógás nélkül, teljes szélesség */
 .topbar{ position:fixed; left:0; right:0; top:0; z-index:1200; }
-.brand-header{
-  position:relative; height:var(--brandH);
-  background:#fff;
-  display:flex; align-items:center; justify-content:center;
-  box-shadow:var(--shadow);
+.brand-header {
+  position: relative;
+  height: var(--brandH);
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow);
 }
-.brand-header .logo{
-  height:var(--logoH); width:auto; object-fit:contain;
-  position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
-  pointer-events:none;
+.brand-header .logo {
+  height: var(--logoH);
+  width: auto;
+  max-height: 100%; /* mindig pont kitölti a fejlécet */
+  object-fit: contain;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
 }
 
 /* NAV (gombsor) */
