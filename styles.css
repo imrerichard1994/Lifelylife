@@ -1,5 +1,5 @@
 /* =========================================================
-   LifelyLife — stílus (v13)
+   LifelyLife — stílus (v14)
    - Jobb oldali fehér csík megszűnik (nincs scrollbar-gutter)
    - Háttér az html-en is (a „gutter” is festve van)
    - Top sávok 0..0 insett-tel, 100vw trükk nélkül
@@ -34,7 +34,7 @@ html, body{
 /* HÁTTÉR (html + body – hogy a „gutter” is festve legyen) */
 html{
   background:
-    linear-gradient(rgba(255,255,255,.85), rgba(255,255,255,.85)),
+    linear-gradient(rgba(255,255,255,.6), rgba(255,255,255,.6)),
     url("images/asztal_hatter.png") center/cover fixed no-repeat;
 }
 body{
@@ -96,7 +96,7 @@ main > section{ width:100%; max-width:1000px; }
 
 /* KÁRTYA */
 .card{
-  background:var(--cardBg); backdrop-filter:blur(2px);
+  background:var(--cardBg); backdrop-filter:blur(4px);
   border-radius:var(--radius); padding:var(--pad);
   box-shadow:0 1px 6px rgba(0,0,0,.06); margin-bottom:var(--gap);
 }
