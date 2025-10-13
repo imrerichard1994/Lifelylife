@@ -13,7 +13,7 @@
   --brand: #2a775a;
   --brandH: 60px;   /* Fejléc magasság fele */
   --navH: 56px;
-  --logoH: 60px;    /* Logó pont kitölti a fejlécet */
+  --logoH: 120px;    /* Logó pont kitölti a fejlécet */
   --tableStickyBg: #fff;
   --text: #111;
   --cardBg: rgba(255, 255, 255, 0.92);
