@@ -228,11 +228,14 @@ body.loaded #splash{ opacity:0; pointer-events:none; }
 .add-card-wrap:last-child {
   order: 999; /* garantálja, hogy mindig a legvégére kerüljön */
 }
+/* ÚJ RECEPT KÁRTYA – egyező méret a többivel */
 .add-card {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  height: 200px; /* ugyanakkora, mint a többi receptkártya képe */
+  border-radius: 12px;
   background: rgba(42, 119, 90, 0.85);
   color: #fff;
   border: 2px dashed rgba(255, 255, 255, 0.4);
@@ -254,5 +257,7 @@ body.loaded #splash{ opacity:0; pointer-events:none; }
   background: none;
   text-shadow: none;
   padding: 0;
+  margin: 0;
 }
+
 
