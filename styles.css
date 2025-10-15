@@ -228,23 +228,24 @@ body.loaded #splash{ opacity:0; pointer-events:none; }
 .add-card-wrap:last-child {
   order: 999; /* garantálja, hogy mindig a legvégére kerüljön */
 }
-/* ÚJ RECEPT KÁRTYA – egyező méret a többivel */
+/* ÚJ RECEPT KÁRTYA – átlátszóbb, egyező méret a többivel */
 .add-card {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  height: 200px; /* ugyanakkora, mint a többi receptkártya képe */
+  height: 200px; /* egyező magasság a többi kártyával */
   border-radius: 12px;
-  background: rgba(42, 119, 90, 0.85);
+  background: rgba(42, 119, 90, 0.35); /* áttetszőbb zöld */
   color: #fff;
-  border: 2px dashed rgba(255, 255, 255, 0.4);
+  border: 2px dashed rgba(255, 255, 255, 0.35);
   box-shadow: none;
   text-align: center;
-  transition: background .25s ease, transform .25s ease;
+  transition: background .25s ease, transform .25s ease, border-color .25s ease;
 }
 .add-card:hover {
-  background: rgba(42, 119, 90, 1);
+  background: rgba(42, 119, 90, 0.55); /* kissé sötétebb hover */
+  border-color: rgba(255, 255, 255, 0.6);
   transform: translateY(-2px);
 }
 .add-card .add-icon {
@@ -260,4 +261,6 @@ body.loaded #splash{ opacity:0; pointer-events:none; }
   margin: 0;
 }
 
-
+@media (max-width:600px){
+  .add-card{ height:170px; }
+}
