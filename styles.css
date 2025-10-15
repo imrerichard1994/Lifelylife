@@ -219,3 +219,40 @@ body.loaded #splash{ opacity:0; pointer-events:none; }
   :root{ --brandH:100px; --navH:52px; --logoH:90px; }
   .recipe-card img{ height:170px; }
 }
+/* ÚJ RECEPT KÁRTYA – mindig utolsó elem */
+.recipes {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+}
+.add-card-wrap:last-child {
+  order: 999; /* garantálja, hogy mindig a legvégére kerüljön */
+}
+.add-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background: rgba(42, 119, 90, 0.85);
+  color: #fff;
+  border: 2px dashed rgba(255, 255, 255, 0.4);
+  box-shadow: none;
+  text-align: center;
+  transition: background .25s ease, transform .25s ease;
+}
+.add-card:hover {
+  background: rgba(42, 119, 90, 1);
+  transform: translateY(-2px);
+}
+.add-card .add-icon {
+  font-size: 3rem;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+.add-card h3 {
+  position: static;
+  background: none;
+  text-shadow: none;
+  padding: 0;
+}
+
